@@ -1,0 +1,56 @@
+* {
+    box-sizing: border-box;
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+}
+
+#grid {
+    user-select: none;
+    border-collapse: collapse;
+    margin: auto;
+}
+
+td {
+    user-select: none;
+    empty-cells: show;
+    width: 25px;
+    height: 25px;
+}
+
+.visited {
+    background-color: rgba(0, 190, 218, 0.75);
+}
+
+.unvisited {
+    border: 1px solid rgb(175, 216, 248);
+}
+
+.wall {
+    background-color: rgb(12, 53, 71);
+    animation-name: wallAnimation;
+    animation-duration: 0.5s;
+}
+
+.start {
+    background-color: rgb(3, 187, 80);
+}
+
+.end {
+    background-color: rgb(187, 3, 18);
+}
+
+@keyframes wallAnimation {
+    0% {
+        transform: scale(.3);
+        background-color: rgb(12, 53, 71);
+    }
+    50% {
+        transform: scale(1.2);
+        background-color: rgb(12, 53, 71);
+    }
+    100% {
+        transform: scale(1.0);
+        background-color: rgb(12, 53, 71);
+    }
+}
