@@ -4,6 +4,9 @@ class Grid
     {
         this.width = width;
         this.height = height;
+        this.mouseDown = false;
+        this.startNode = null;
+        this.targetNode = null;
         this.nodes = Grid.buildBlankGrid(this.width, this.height);
     }
 
@@ -48,10 +51,13 @@ class Grid
                 cell.id = thisNode.position;
                 cell.classList.add(thisNode.state);
 
-                //Adds event listeners which listen for mouse clicks etc
+                //Adds event listeners to each node which listen for mouse clicks etc
                 this.addListeners(cell, thisNode);
             }
         }
+
+        //Single mouseup event added to document rather than every cell
+        document.addEventListener('mouseup', () => this.mouseDown = false);
     }
 
     //Adds event listeners to a given cell
@@ -59,22 +65,60 @@ class Grid
     //@param node The Node object which corresponds to the given cell
     addListeners(cell, node)
     {
-        var mouseDown = false;
-
-        cell.addEventListener('mousedown', () => {
-            this.mouseDown = true;
-            node.click();
-        });
-
-        cell.addEventListener('mouseover', () => {
-            if (this.mouseDown)
+        cell.addEventListener('mousedown', e => {
+            
+            if (e.shiftKey)
             {
-                node.click();
+                this.setStart(node);
+            }
+            
+            else if (e.ctrlKey)
+            {
+                this.setTarget(node);
+            }
+            
+            else if (node.state === State.WALL || node.state === State.UNVISITED)
+            {
+                this.mouseDown = true;
+                node.toggleWall();
             }
         });
 
-        cell.addEventListener('mouseup', () => {
-            this.mouseDown = false
+        cell.addEventListener('mouseover', () => {
+            if (this.mouseDown && (node.state === State.WALL || node.state === State.UNVISITED))
+            {
+                node.toggleWall();
+            }
         });
+    }
+
+    setStart(node)
+    {
+        if (this.startNode === null)
+        {
+            node.makeStart();
+            this.startNode = node;
+        }
+        else
+        {
+            this.startNode.setState(State.UNVISITED);
+            node.makeStart();
+            this.startNode = node;
+        }
+    }
+
+    setTarget(node)
+    {
+        if (this.targetNode === null)
+        {
+            node.makeTarget();
+            this.targetNode = node;
+        }
+        else
+        {
+            this.targetNode.setState(State.UNVISITED);
+            node.makeTarget();
+            this.targetNode = node;
+        }
     }
 }

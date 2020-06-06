@@ -1,11 +1,9 @@
 class Node 
 {
-    constructor(position, isStart, isFinish)
+    constructor(position)
     {
         this.state = State.UNVISITED;
         this.position = position;
-        this.isStart = isStart;
-        this.isFinish = isFinish;
     }
 
     setState(state)
@@ -20,10 +18,18 @@ class Node
         document.getElementById(this.position).className = this.state;
     }
 
-    //Called when a node is clicked
-    click()
+    toggleWall()
     {
-        //Toggle state between UNVISITED and WALL
         this.state == State.UNVISITED ? this.setState(State.WALL) : this.setState(State.UNVISITED);
+    }
+
+    makeStart()
+    {
+        this.setState(State.START);
+    }
+
+    makeTarget()
+    {
+        this.setState(State.TARGET);
     }
 }
