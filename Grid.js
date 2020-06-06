@@ -38,14 +38,14 @@ class Grid
         let grid = document.getElementById('grid');
 
         //Constructs table
-        for (let i = 0; i < this.height; i++)
+        for (let currentRow = 0; currentRow < this.height; currentRow++)
         {
-            let row = grid.insertRow(i);
+            let row = grid.insertRow(currentRow);
 
-            for (let j = 0; j < this.width; j++)
+            for (let currentColumn = 0; currentColumn < this.width; currentColumn++)
             {
-                let cell = row.insertCell(j);
-                let thisNode = this.nodes[i][j];
+                let cell = row.insertCell(currentColumn);
+                let thisNode = this.nodes[currentRow][currentColumn];
 
                 //Adds corresponding id and class to each cell in table
                 cell.id = thisNode.position;
