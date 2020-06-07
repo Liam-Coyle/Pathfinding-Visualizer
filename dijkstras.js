@@ -1,80 +1,95 @@
-//Runs dijkstras algorithm on a grid.
-//@returns Array containing: 0. Map(node, cost) containing the cost of reaching each node from the start node. 
-//                           1. Array of visited nodes in order they were visited.
-//                           2. Map(node, previous) mapping each node to the node they came from. 
+/**
+ * Runs Dijkstras algorithm on a grid.
+ * @param {Object} grid Grid object to run Dijkstras algorithm on.
+ * @return {array} Array containing:
+ * 1. totalCosts: Map(node, cost) containing the cost of reaching each node from the start node. 
+ * 2. visitedNodesInOrder: Array of visited nodes in order they were visited.
+ * 3. previousNodes: Map(node, previous) mapping each node to the node they came from.
+ */
 function runDijkstrasAlgorithm(grid)
 {
-    if (grid.startNode === null || grid.targetNode == null)
+    if (grid == null || grid.startNode === null || grid.targetNode == null)
     {
         return;
     }
-    
-    let totalCosts = new Map(); //Maps node => shortest path to that node from start node
-    let previousNodes = new Map(); //Maps node => node it came from
+
+    let totalCosts = new Map();
+    let previousNodes = new Map();
     let underConsideration = new PriorityQueue();
-    let visitedNodesInOrder = []; //Stores visited nodes in order
+    let visitedNodesInOrder = [];
 
-    //Set the cost of every node apart from our start node to infinity
-    for (let row = 0; row < grid.height; row++)
-    {
-        for (let column = 0; column < grid.width; column++)
-        {
-            let thisNode = grid.nodes[row][column];
-            if (thisNode != grid.startNode)
-            {
-                totalCosts.set(thisNode, Infinity);
-            }
-        }
-    }
+    setInitialCosts();
+    considerIfNotAlreadyBeingConsidered(grid.startNode);
 
-    totalCosts.set(grid.startNode, 0); //Set the start node to a cost of 1
-    underConsideration.enqueue(grid.startNode, 0); //Add it to the list of nodes currently under consideration
-
-    //While underConsideration is not empty
     while (!underConsideration.isEmpty())
     {
-        let currentNode = underConsideration.dequeue().element; //Remove node of highest priority from min PQ
-        visitedNodesInOrder.push(currentNode); //Visit it
+        let mostRecentlyVisitedNode = underConsideration.dequeue().element;
+        visitedNodesInOrder.push(mostRecentlyVisitedNode);
 
-        //For every neighbouring node
-        for (let neighbour of grid.getNeighboursOfNode(currentNode))
+        for (let neighbour of grid.getNeighboursOfNode(mostRecentlyVisitedNode))
         {
             if (neighbour == null || neighbour.state == State.WALL) 
             {
                 continue;
             }
 
-            //If it has not been visited already
-            if (!visitedNodesInOrder.includes(neighbour)) //TODO: COULD OPTIMIZE THIS
+            if (!visitedNodesInOrder.includes(neighbour)) //TODO: Optimize this
             {
-                //Add it to queue if it's not there already
-                if (!(underConsideration.containsInnerElement(neighbour)))
-                {
-                    underConsideration.enqueue(neighbour, totalCosts.get(neighbour));
-                }
-
-                //Calculate the cost of visiting it from current node
-                let costOfPathFromCurrentNode = totalCosts.get(currentNode) + 1; //NOTE: DIST HARD CODED AS 1 FOR NOW
-
-                //If the cost is a new record for that node
-                if (costOfPathFromCurrentNode < totalCosts.get(neighbour))
-                {
-                    //Update it
-                    totalCosts.set(neighbour, costOfPathFromCurrentNode);
-
-                    //Link it to the node we came from
-                    previousNodes.set(neighbour, currentNode);
-
-                    //Update it's priority in the queue
-                    underConsideration.updatePriority(neighbour, costOfPathFromCurrentNode);
-                }
+                considerIfNotAlreadyBeingConsidered(neighbour);
+                tryToFindBetterPath(mostRecentlyVisitedNode, neighbour);
             }
         }
     }
 
-    let results = [];
-    results.push(totalCosts);
-    results.push(visitedNodesInOrder);
-    results.push(previousNodes);
-    return results;
+    return [totalCosts, visitedNodesInOrder, previousNodes];
+
+    /**
+     * Adds a node to the 'underConsideration' PriorityQueue if it is not already there.
+     * @param {Object} neighbour 
+     */
+    function considerIfNotAlreadyBeingConsidered(neighbour) 
+    {
+        if (!(underConsideration.containsInnerElement(neighbour))) 
+        {
+            underConsideration.enqueue(neighbour, totalCosts.get(neighbour));
+            //TODO: Add animation for nodes under consideration
+        }
+    }
+
+    /**
+     * Tries to find a path faster than the currently known path from the start node to neighbour.
+     * If successful, the new cost of the neighbour node is updated in totalCosts map.
+     * @param {Object} currentNode The node which has most recently been visited.
+     * @param {Object} neighbour A neighbour node to currentNode.
+     */
+    function tryToFindBetterPath(currentNode, neighbour) 
+    {
+        let costOfPathFromCurrentNode = totalCosts.get(currentNode) + 1; //FIXME: Distance hard coded as 1 for now.
+        if (costOfPathFromCurrentNode < totalCosts.get(neighbour)) 
+        {
+            totalCosts.set(neighbour, costOfPathFromCurrentNode);
+            previousNodes.set(neighbour, currentNode);
+            underConsideration.updatePriority(neighbour, costOfPathFromCurrentNode);
+        }
+    }
+
+    /**
+     * Sets the initial cost of every node to Infinity.
+     * Sets the inital cost of the starting node to 0.
+     */
+    function setInitialCosts() 
+    {
+        for (let row = 0; row < grid.height; row++) 
+        {
+            for (let column = 0; column < grid.width; column++) 
+            {
+                let thisNode = grid.nodes[row][column];
+                if (thisNode != grid.startNode) 
+                {
+                    totalCosts.set(thisNode, Infinity);
+                }
+            }
+        }
+        totalCosts.set(grid.startNode, 0);
+    }
 }
