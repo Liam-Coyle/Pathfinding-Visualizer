@@ -120,22 +120,50 @@ class Grid
         }
     }
 
-    getNeighboursOfNode(node)
+    getNodePositionAsInt(node)
     {
-        //Prepare array
-        let neighbouringNodes = new Array(4);
-
-        //Get node position
+        if (node === null)
+        {
+            return [null, null];
+        }
         let nodePositionArrayStr = node.position.split("-"); //Get x,y position as array of strings
         let nodeRow = parseInt(nodePositionArrayStr[0]); //Convert x to int
         let nodeColumn = parseInt(nodePositionArrayStr[1]); //Convert y to int
+        return [nodeRow, nodeColumn];
+    }
 
+    getNeighboursOfNode(node)
+    {
+        //Prepare array
+        let neighbouringNodes = new Array(8);
+
+        //Get node position
+        let [nodeRow, nodeColumn] = this.getNodePositionAsInt(node);
+        if (nodeRow === null)
+        {
+            return null;
+        }
+        
         //Get neighbouring nodes
         neighbouringNodes[0] = (nodeRow - 1 >= 0) ? this.nodes[nodeRow - 1][nodeColumn] : null; //Above
-        neighbouringNodes[1] = (nodeColumn + 1 < this.width) ? this.nodes[nodeRow][nodeColumn + 1] : null; //Right
-        neighbouringNodes[2] = (nodeRow + 1 < this.height) ? this.nodes[nodeRow + 1][nodeColumn] : null; //Below
-        neighbouringNodes[3] = (nodeColumn - 1 >= 0) ? this.nodes[nodeRow][nodeColumn - 1] : null; //Left
-
+        neighbouringNodes[1] = ((nodeRow - 1 >= 0) && (nodeColumn + 1 < this.width)) ? this.nodes[nodeRow - 1][nodeColumn + 1] : null; //Top-right
+        neighbouringNodes[2] = (nodeColumn + 1 < this.width) ? this.nodes[nodeRow][nodeColumn + 1] : null; //Right
+        neighbouringNodes[3] = ((nodeRow + 1 < this.height) && (nodeColumn + 1 < this.width)) ? this.nodes[nodeRow + 1][nodeColumn + 1] : null; //Bottom-right
+        neighbouringNodes[4] = (nodeRow + 1 < this.height) ? this.nodes[nodeRow + 1][nodeColumn] : null; //Below
+        neighbouringNodes[5] = ((nodeRow + 1 < this.height) && (nodeColumn - 1 >= 0)) ? this.nodes[nodeRow + 1][nodeColumn - 1] : null; //Bottom-left
+        neighbouringNodes[6] = (nodeColumn - 1 >= 0) ? this.nodes[nodeRow][nodeColumn - 1] : null; //Left
+        neighbouringNodes[7] = ((nodeRow - 1 >= 0) && (nodeColumn - 1 >= 0)) ? this.nodes[nodeRow - 1][nodeColumn - 1] : null; //Top-left
         return neighbouringNodes;
+    }
+
+    getDistance(nodeA, nodeB)
+    {
+        let [nodeARow, nodeAColumn] = this.getNodePositionAsInt(nodeA);
+        let [nodeBRow, nodeBColumn] = this.getNodePositionAsInt(nodeB);
+
+        let diffColumnSquared = Math.pow(nodeBColumn - nodeAColumn, 2);
+        let diffRowSquared = Math.pow(nodeBRow - nodeARow, 2);
+
+        return Math.floor((10 * Math.sqrt(diffRowSquared + diffColumnSquared)));
     }
 }

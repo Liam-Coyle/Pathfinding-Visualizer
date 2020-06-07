@@ -40,7 +40,6 @@ function runDijkstrasAlgorithm(grid)
             }
         }
     }
-
     return [totalCosts, visitedNodesInOrder, previousNodes];
 
     /**
@@ -52,7 +51,6 @@ function runDijkstrasAlgorithm(grid)
         if (!(underConsideration.containsInnerElement(neighbour))) 
         {
             underConsideration.enqueue(neighbour, totalCosts.get(neighbour));
-            //TODO: Add animation for nodes under consideration
         }
     }
 
@@ -64,7 +62,7 @@ function runDijkstrasAlgorithm(grid)
      */
     function tryToFindBetterPath(currentNode, neighbour) 
     {
-        let costOfPathFromCurrentNode = totalCosts.get(currentNode) + 1; //FIXME: Distance hard coded as 1 for now.
+        let costOfPathFromCurrentNode = totalCosts.get(currentNode) + grid.getDistance(currentNode, neighbour);
         if (costOfPathFromCurrentNode < totalCosts.get(neighbour)) 
         {
             totalCosts.set(neighbour, costOfPathFromCurrentNode);
