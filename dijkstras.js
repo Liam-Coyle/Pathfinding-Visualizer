@@ -10,7 +10,7 @@ function runDijkstrasAlgorithm(grid)
 {
     if (grid == null || grid.startNode === null || grid.targetNode == null)
     {
-        return;
+        return [null, null, null];
     }
 
     let totalCosts = new Map();

@@ -4,6 +4,10 @@ myGrid.draw();
 function visualizeDijkstras()
 {
     [costs, order, previousNodes] = runDijkstrasAlgorithm(myGrid);
+    if (order === null)
+    {
+        return;
+    }
 
     let visitedNodesAnimationDelay = 10;
     let shortestPathAnimationDelay = 10;
