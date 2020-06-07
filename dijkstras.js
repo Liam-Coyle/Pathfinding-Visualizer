@@ -4,6 +4,11 @@
 //                           2. Map(node, previous) mapping each node to the node they came from. 
 function runDijkstrasAlgorithm(grid)
 {
+    if (grid.startNode === null || grid.targetNode == null)
+    {
+        return;
+    }
+    
     let totalCosts = new Map(); //Maps node => shortest path to that node from start node
     let previousNodes = new Map(); //Maps node => node it came from
     let underConsideration = new PriorityQueue();
