@@ -135,7 +135,7 @@ class Grid
     getNeighboursOfNode(node)
     {
         //Prepare array
-        let neighbouringNodes = new Array(8);
+        let neighbouringNodes = new Array(4);
 
         //Get node position
         let [nodeRow, nodeColumn] = this.getNodePositionAsInt(node);
@@ -146,13 +146,9 @@ class Grid
         
         //Get neighbouring nodes
         neighbouringNodes[0] = (nodeRow - 1 >= 0) ? this.nodes[nodeRow - 1][nodeColumn] : null; //Above
-        neighbouringNodes[1] = ((nodeRow - 1 >= 0) && (nodeColumn + 1 < this.width)) ? this.nodes[nodeRow - 1][nodeColumn + 1] : null; //Top-right
-        neighbouringNodes[2] = (nodeColumn + 1 < this.width) ? this.nodes[nodeRow][nodeColumn + 1] : null; //Right
-        neighbouringNodes[3] = ((nodeRow + 1 < this.height) && (nodeColumn + 1 < this.width)) ? this.nodes[nodeRow + 1][nodeColumn + 1] : null; //Bottom-right
-        neighbouringNodes[4] = (nodeRow + 1 < this.height) ? this.nodes[nodeRow + 1][nodeColumn] : null; //Below
-        neighbouringNodes[5] = ((nodeRow + 1 < this.height) && (nodeColumn - 1 >= 0)) ? this.nodes[nodeRow + 1][nodeColumn - 1] : null; //Bottom-left
-        neighbouringNodes[6] = (nodeColumn - 1 >= 0) ? this.nodes[nodeRow][nodeColumn - 1] : null; //Left
-        neighbouringNodes[7] = ((nodeRow - 1 >= 0) && (nodeColumn - 1 >= 0)) ? this.nodes[nodeRow - 1][nodeColumn - 1] : null; //Top-left
+        neighbouringNodes[1] = (nodeColumn + 1 < this.width) ? this.nodes[nodeRow][nodeColumn + 1] : null; //Right
+        neighbouringNodes[2] = (nodeRow + 1 < this.height) ? this.nodes[nodeRow + 1][nodeColumn] : null; //Below
+        neighbouringNodes[3] = (nodeColumn - 1 >= 0) ? this.nodes[nodeRow][nodeColumn - 1] : null; //Left
         return neighbouringNodes;
     }
 
