@@ -4,5 +4,6 @@ const State =
     VISITED: 'visited',
     WALL: 'wall',
     START: 'start',
-    TARGET: 'target'
+    TARGET: 'target',
+    HIGHLIGHT: 'highlight'
 }

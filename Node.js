@@ -20,7 +20,14 @@ class Node
 
     toggleWall()
     {
-        this.state == State.UNVISITED ? this.setState(State.WALL) : this.setState(State.UNVISITED);
+        if (this.state == State.UNVISITED) 
+        {
+            this.setState(State.WALL);
+        }
+        else
+        {
+            this.setState(State.UNVISITED);  
+        } 
     }
 
     makeStart()

@@ -67,16 +67,14 @@ class Grid
     {
         cell.addEventListener('mousedown', e => {
             
-            if (e.shiftKey)
+            if (e.shiftKey) 
             {
                 this.setStart(node);
             }
-            
-            else if (e.ctrlKey)
+            else if (e.ctrlKey) 
             {
                 this.setTarget(node);
             }
-            
             else if (node.state === State.WALL || node.state === State.UNVISITED)
             {
                 this.mouseDown = true;
@@ -120,5 +118,24 @@ class Grid
             node.makeTarget();
             this.targetNode = node;
         }
+    }
+
+    getNeighboursOfNode(node)
+    {
+        //Prepare array
+        let neighbouringNodes = new Array(4);
+
+        //Get node position
+        let nodePositionArrayStr = node.position.split("-"); //Get x,y position as array of strings
+        let nodeRow = parseInt(nodePositionArrayStr[0]); //Convert x to int
+        let nodeColumn = parseInt(nodePositionArrayStr[1]); //Convert y to int
+
+        //Get neighbouring nodes
+        neighbouringNodes[0] = (nodeRow - 1 >= 0) ? this.nodes[nodeRow - 1][nodeColumn] : null; //Above
+        neighbouringNodes[1] = (nodeColumn + 1 < this.width) ? this.nodes[nodeRow][nodeColumn + 1] : null; //Right
+        neighbouringNodes[2] = (nodeRow + 1 < this.height) ? this.nodes[nodeRow + 1][nodeColumn] : null; //Below
+        neighbouringNodes[3] = (nodeColumn - 1 >= 0) ? this.nodes[nodeRow][nodeColumn - 1] : null; //Left
+
+        return neighbouringNodes;
     }
 }
