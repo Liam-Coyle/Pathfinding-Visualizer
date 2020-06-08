@@ -2,20 +2,19 @@
  * Runs A* algorithm on a grid.
  * @param {Object} grid Grid object to run A* algorithm on.
  * @return {array} Array containing:
- * 1. totalCosts: Map(node, cost) containing the cost of reaching each node from the start node. 
+ * 1. gCosts: Map(node, gCost) (gCost = Cost of reaching a node from the start node).
  * 2. visitedNodesInOrder: Array of visited nodes in order they were visited.
- * 3. previousNodes: Map(node, previous) mapping each node to the node they came from.
+ * 3. previousNodes: Map(node, previousNode) mapping each node to the node they came from.
  */
 function runAStarAlgorithm(grid)
 {
     if (grid == null || grid.startNode === null || grid.targetNode == null)
     {
-        return [null, null, null];
+        return [null, null, null]; //TODO: Change this to throw exception
     }
 
     let gCosts = new Map();
     let hCosts = new Map();
-    let fCosts = new Map();
     let previousNodes = new Map();
     let underConsideration = new PriorityQueue();
     let visitedNodesInOrder = [];
@@ -53,31 +52,31 @@ function runAStarAlgorithm(grid)
     {
         if (!(underConsideration.containsInnerElement(node))) 
         {
-            underConsideration.enqueue(node, fCosts.get(node));
+            underConsideration.enqueue(node, gCosts.get(node) + hCosts.get(node));
         }
     }
 
     /**
-     * Tries to find a path faster than the currently known path from the start node to neighbour.
-     * If successful, the new cost of the neighbour node is updated in totalCosts map.
-     * @param {Object} currentNode The node which has most recently been visited.
-     * @param {Object} neighbour A neighbour node to currentNode.
+     * Tries to find a path to nodeB via nodeA, with a lower gCost than the currently known path.
+     * If successful, the new gCost of nodeB is updated.
+     * @param {Object} nodeA The node from which the possible new path is via.
+     * @param {Object} nodeB The node which is trying to improve it's gCost.
      */
-    function tryToFindBetterPath(currentNode, neighbour) 
+    function tryToFindBetterPath(nodeA, nodeB) 
     {
-        let costOfPathFromCurrentNode = gCosts.get(currentNode) + grid.getDistance(currentNode, neighbour);
-        if (costOfPathFromCurrentNode < gCosts.get(neighbour)) 
+        let costOfPathFromCurrentNode = gCosts.get(nodeA) + grid.getDistance(nodeA, nodeB);
+        if (costOfPathFromCurrentNode < gCosts.get(nodeB)) 
         {
-            gCosts.set(neighbour, costOfPathFromCurrentNode);
-            fCosts.set(neighbour, gCosts.get(neighbour) + hCosts.get(neighbour));
-            previousNodes.set(neighbour, currentNode);
-            underConsideration.updatePriority(neighbour, fCosts.get(neighbour));
+            gCosts.set(nodeB, costOfPathFromCurrentNode);
+            previousNodes.set(nodeB, nodeA);
+            underConsideration.updatePriority(nodeB, gCosts.get(nodeB) + hCosts.get(nodeB));
         }
     }
 
     /**
-     * Sets the initial cost of every node to Infinity.
-     * Sets the inital cost of the starting node to 0.
+     * Sets the initial gCost of every node to Infinity.
+     * Sets the inital gCost of the starting node to 0.
+     * Sets the correct hCost for every node.
      */
     function setInitialCosts() 
     {
@@ -90,12 +89,10 @@ function runAStarAlgorithm(grid)
                 {
                     gCosts.set(thisNode, Infinity);
                     hCosts.set(thisNode, grid.getDistance(grid.targetNode, thisNode));
-                    fCosts.set(thisNode, gCosts.get(thisNode) + hCosts.get(thisNode));
                 }
             }
         }
         gCosts.set(grid.startNode, 0);
         hCosts.set(grid.startNode, grid.getDistance(grid.targetNode, grid.startNode));
-        fCosts.set(grid.startNode, 0 + grid.getDistance(grid.targetNode, grid.startNode));
     }
 }
