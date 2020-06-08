@@ -2,23 +2,23 @@
  * Runs Dijkstras algorithm on a grid.
  * @param {Object} grid Grid object to run Dijkstras algorithm on.
  * @return {array} Array containing:
- * 1. totalCosts: Map(node, cost) containing the cost of reaching each node from the start node. 
+ * 1. gCosts: Map(node, gCost) (gCost = Cost of reaching a node from the start node).
  * 2. visitedNodesInOrder: Array of visited nodes in order they were visited.
- * 3. previousNodes: Map(node, previous) mapping each node to the node they came from.
+ * 3. previousNodes: Map(node, previousNode) mapping each node to the node they came from.
  */
 function runDijkstrasAlgorithm(grid)
 {
     if (grid == null || grid.startNode === null || grid.targetNode == null)
     {
-        return [null, null, null];
+        return [null, null, null]; //TODO: Change this to throw exception
     }
 
-    let totalCosts = new Map();
+    let gCosts = new Map();
     let previousNodes = new Map();
     let underConsideration = new PriorityQueue();
     let visitedNodesInOrder = [];
 
-    setInitialCosts();
+    setInitialGCosts();
     considerIfNotAlreadyBeingConsidered(grid.startNode);
 
     while (!underConsideration.isEmpty())
@@ -40,42 +40,42 @@ function runDijkstrasAlgorithm(grid)
             }
         }
     }
-    return [totalCosts, visitedNodesInOrder, previousNodes];
+    return [gCosts, visitedNodesInOrder, previousNodes];
 
     /**
      * Adds a node to the 'underConsideration' PriorityQueue if it is not already there.
-     * @param {Object} neighbour 
+     * @param {Object} node The node to add.
      */
-    function considerIfNotAlreadyBeingConsidered(neighbour) 
+    function considerIfNotAlreadyBeingConsidered(node) 
     {
-        if (!(underConsideration.containsInnerElement(neighbour))) 
+        if (!(underConsideration.containsInnerElement(node))) 
         {
-            underConsideration.enqueue(neighbour, totalCosts.get(neighbour));
+            underConsideration.enqueue(node, gCosts.get(node));
         }
     }
 
     /**
-     * Tries to find a path faster than the currently known path from the start node to neighbour.
-     * If successful, the new cost of the neighbour node is updated in totalCosts map.
-     * @param {Object} currentNode The node which has most recently been visited.
-     * @param {Object} neighbour A neighbour node to currentNode.
+     * Tries to find a path to nodeB via nodeA, with a lower gCost than the currently known path.
+     * If successful, the new gCost of nodeB is updated.
+     * @param {Object} nodeA The node from which the possible new path is via.
+     * @param {Object} nodeB The node which is trying to improve it's gCost.
      */
-    function tryToFindBetterPath(currentNode, neighbour) 
+    function tryToFindBetterPath(nodeA, nodeB) 
     {
-        let costOfPathFromCurrentNode = totalCosts.get(currentNode) + grid.getDistance(currentNode, neighbour);
-        if (costOfPathFromCurrentNode < totalCosts.get(neighbour)) 
+        let costOfPathFromCurrentNode = gCosts.get(nodeA) + grid.getDistance(nodeA, nodeB);
+        if (costOfPathFromCurrentNode < gCosts.get(nodeB)) 
         {
-            totalCosts.set(neighbour, costOfPathFromCurrentNode);
-            previousNodes.set(neighbour, currentNode);
-            underConsideration.updatePriority(neighbour, costOfPathFromCurrentNode);
+            gCosts.set(nodeB, costOfPathFromCurrentNode);
+            previousNodes.set(nodeB, nodeA);
+            underConsideration.updatePriority(nodeB, costOfPathFromCurrentNode);
         }
     }
 
     /**
-     * Sets the initial cost of every node to Infinity.
-     * Sets the inital cost of the starting node to 0.
+     * Sets the initial gCost of every node to Infinity.
+     * Sets the inital gCost of the starting node to 0.
      */
-    function setInitialCosts() 
+    function setInitialGCosts() 
     {
         for (let row = 0; row < grid.height; row++) 
         {
@@ -84,10 +84,10 @@ function runDijkstrasAlgorithm(grid)
                 let thisNode = grid.nodes[row][column];
                 if (thisNode != grid.startNode) 
                 {
-                    totalCosts.set(thisNode, Infinity);
+                    gCosts.set(thisNode, Infinity);
                 }
             }
         }
-        totalCosts.set(grid.startNode, 0);
+        gCosts.set(grid.startNode, 0);
     }
 }
