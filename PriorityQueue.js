@@ -48,13 +48,15 @@ class PriorityQueue {
 
     updatePriority(targetInnerElement, priority)
     {
-        for (let queueElement of this.items)
+        for (let index = 0; index < this.items.length; index++)
         {
-            if (targetInnerElement === queueElement.element)
+            if (this.items[index].element === targetInnerElement)
             {
-                queueElement.priority = priority;
+                this.items.splice(index, 1);
+                break;
             }
         }
+        this.enqueue(targetInnerElement, priority);
     }
 
     containsInnerElement(targetInnerElement)
