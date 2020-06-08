@@ -17,6 +17,22 @@ function visualizeDijkstras()
     setTimeout(() => animateShortestPath(shortestPathOrder, shortestPathAnimationDelay), targetNodeIndex * visitedNodesAnimationDelay); //Could use promises here?
 }
 
+function visualizeAStar()
+{
+    [gCosts, order, previousNodes] = runAStarAlgorithm(myGrid);
+    if (order === null)
+    {
+        return;
+    }
+
+    let visitedNodesAnimationDelay = 10;
+    let shortestPathAnimationDelay = 10;
+
+    let targetNodeIndex = animateVisitedNodes(order, visitedNodesAnimationDelay);
+    let shortestPathOrder = getShortestPathOrder(previousNodes, myGrid.targetNode);
+    setTimeout(() => animateShortestPath(shortestPathOrder, shortestPathAnimationDelay), targetNodeIndex * visitedNodesAnimationDelay); //Could use promises here?
+}
+
 function animateVisitedNodes(order, animationDelay)
 {
     let targetNodeIndex = null;

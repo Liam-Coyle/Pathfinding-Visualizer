@@ -157,9 +157,9 @@ class Grid
         let [nodeARow, nodeAColumn] = this.getNodePositionAsInt(nodeA);
         let [nodeBRow, nodeBColumn] = this.getNodePositionAsInt(nodeB);
 
-        let diffColumnSquared = Math.pow(nodeBColumn - nodeAColumn, 2);
-        let diffRowSquared = Math.pow(nodeBRow - nodeARow, 2);
+        let diffColumn = Math.abs(nodeBColumn - nodeAColumn);
+        let diffRow = Math.abs(nodeBRow - nodeARow);
 
-        return Math.floor((10 * Math.sqrt(diffRowSquared + diffColumnSquared)));
+        return (diffColumn + diffRow);
     }
 }
