@@ -162,4 +162,43 @@ class Grid
 
         return (diffColumn + diffRow);
     }
+
+    reset(removeStartAndTarget)
+    {
+        for (let row = 0; row < this.height; row++)
+        {
+            for (let column = 0; column < this.width; column++)
+            {
+                let thisNode = this.nodes[row][column];
+                if (thisNode === this.startNode || thisNode === this.targetNode)
+                {
+                    if (removeStartAndTarget)
+                    {
+                        thisNode.setState(State.UNVISITED);
+                        this.startNode = null;
+                        this.targetNode = null;
+                    }
+                }
+                else
+                {
+                    thisNode.setState(State.UNVISITED);
+                }
+            }
+        }
+    }
+
+    clearPath()
+    {
+        for (let row = 0; row < this.height; row++)
+        {
+            for (let column = 0; column < this.width; column++)
+            {
+                let thisNode = this.nodes[row][column];
+                if (thisNode.state === State.HIGHLIGHT || thisNode.state === State.VISITED)
+                {
+                    thisNode.setState(State.UNVISITED);
+                }
+            }
+        }
+    }
 }

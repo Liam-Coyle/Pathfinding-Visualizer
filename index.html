@@ -13,8 +13,23 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <table id = 'grid'></table>
-        <div class = "buttonContainer"><button onclick = "visualizeDijkstras();">Visualize Dijkstras Algorithm</button></div>
-        <div class = "buttonContainer"><button onclick = "visualizeAStar();">Visualize A* Algorithm</button></div>
+        <div class = "wrapper">
+            <ul id = "controlPanel">
+                <li>
+                    <select name="algorithmDropdown" id="algorithmDropdown" class = "option">
+                        <option value = "runDijkstrasAlgorithm">Dijkstras</option>
+                        <option value = "runAStarAlgorithm">A*</option>
+                    </select>
+                </li>
+                <li><button class = "option" onclick = "visualizeAlgorithm();">Visualize</button></li>
+                <li><button class = "option" onclick = "resetGrid();">Reset grid</button></li>
+                <li><button class = "option" onclick = "clearWalls();">Clear walls</button></li>
+                <li><button class = "option" onclick = "clearPath();">Clear path</button></li>
+            </ul>
+            <div id = "key">
+
+            </div>
+            <table id = 'grid'></table>
+        </div>
     </body>
 </html>

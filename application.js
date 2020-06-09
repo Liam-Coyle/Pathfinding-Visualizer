@@ -1,30 +1,15 @@
 const myGrid = new Grid(75,28);
 myGrid.draw();
 
-function visualizeDijkstras()
+function visualizeAlgorithm()
 {
+    clearPath();
+
     try
     {
-        [costs, order, previousNodes] = runDijkstrasAlgorithm(myGrid);
-    }
-    catch (err)
-    {
-        return;
-    }
-
-    let visitedNodesAnimationDelay = 10;
-    let shortestPathAnimationDelay = 10;
-
-    let targetNodeIndex = animateVisitedNodes(order, visitedNodesAnimationDelay);
-    let shortestPathOrder = getShortestPathOrder(previousNodes, myGrid.targetNode);
-    setTimeout(() => animateShortestPath(shortestPathOrder, shortestPathAnimationDelay), targetNodeIndex * visitedNodesAnimationDelay); //Could use promises here?
-}
-
-function visualizeAStar()
-{
-    try
-    {
-        [costs, order, previousNodes] = runAStarAlgorithm(myGrid);
+        let menu = document.getElementById('algorithmDropdown');
+        let algorithm = window[menu.options[menu.selectedIndex].value];
+        [costs, order, previousNodes] = algorithm(myGrid);
     }
     catch (err)
     {
@@ -71,5 +56,32 @@ function animateShortestPath(order, animationDelay)
     for (let index = 1; index < order.length; index++)
     {
         setTimeout(() => order[index].setState(State.HIGHLIGHT), animationDelay * index);
+    }
+}
+
+function resetGrid()
+{
+    stopAllAnimations();
+    myGrid.reset(true);
+}
+
+function clearWalls()
+{
+    stopAllAnimations();
+    myGrid.reset(false);
+}
+
+function clearPath() 
+{
+    stopAllAnimations();
+    myGrid.clearPath();
+}
+
+function stopAllAnimations()
+{
+    var id = window.setTimeout(function() {}, 0);
+    while (id--) 
+    {
+        window.clearTimeout(id);
     }
 }

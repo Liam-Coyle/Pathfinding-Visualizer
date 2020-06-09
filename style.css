@@ -3,34 +3,65 @@
     padding: 0px;
     margin: 0px;
     border: 0px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.wrapper {
+    margin: auto;
+    width: 95%;
 }
 
 #grid {
+    margin: auto;
     user-select: none;
     border-collapse: collapse;
-    margin: auto;
+    background-color: white;
 }
 
-td {
+#controlPanel {
+    width: 100%;
+    height: 80px;
+    background-color: #34495e;
+}
+
+#controlPanel li {
+    display: block;
+    float: left;
+    height: 100%;
+    width: 10%;
+}
+
+.option {
+    outline: none;
+    text-align: center;
+    text-align-last: center;
+    background-color: #34495e;
+    font-size: 1.2em;
+    color: white;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+}
+
+.option:hover {
+    cursor: pointer;
+    color: #16a085;
+}
+
+option {
+    color: white;
+}
+
+#key {
+    width: 100%;
+    height: 25px;
+}
+
+#grid td {
     user-select: none;
     empty-cells: show;
     width: 25px;
     height: 25px;
-}
-
-button {
-    margin-left: auto;
-    background-color: rgb(12, 53, 71);
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 16px;
-  }
-
-.buttonContainer {
-    text-align: center;
 }
 
 .visited {
