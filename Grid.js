@@ -7,6 +7,8 @@ class Grid
         this.mouseDown = false;
         this.startNode = null;
         this.targetNode = null;
+        this.draggingStart = false;
+        this.draggingTarget = false;
         this.nodes = Grid.buildBlankGrid(this.width, this.height);
     }
 
@@ -36,6 +38,7 @@ class Grid
     draw()
     {
         let grid = document.getElementById('grid');
+        grid.innerHTML = '';
 
         //Constructs table
         for (let currentRow = 0; currentRow < this.height; currentRow++)
@@ -56,8 +59,16 @@ class Grid
             }
         }
 
+        this.setStart(myGrid.nodes[14][19]); //TODO: Make dynamic
+        this.setTarget(myGrid.nodes[14][57]);
+
         //Single mouseup event added to document rather than every cell
-        document.addEventListener('mouseup', () => this.mouseDown = false);
+        document.addEventListener('mouseup', () => 
+        {
+            this.mouseDown = false
+            this.draggingStart = false;
+            this.draggingTarget = false;
+        });
     }
 
     //Adds event listeners to a given cell
@@ -66,14 +77,13 @@ class Grid
     addListeners(cell, node)
     {
         cell.addEventListener('mousedown', e => {
-            
-            if (e.shiftKey) 
+            if (node.state === State.START)
             {
-                this.setStart(node);
+                this.draggingStart = true;
             }
-            else if (e.ctrlKey) 
+            else if (node.state === State.TARGET)
             {
-                this.setTarget(node);
+                this.draggingTarget = true;
             }
             else if (node.state === State.WALL || node.state === State.UNVISITED)
             {
@@ -83,7 +93,15 @@ class Grid
         });
 
         cell.addEventListener('mouseover', () => {
-            if (this.mouseDown && (node.state === State.WALL || node.state === State.UNVISITED))
+            if (this.draggingStart)
+            {
+                this.setStart(node);
+            }
+            else if (this.draggingTarget)
+            {
+                this.setTarget(node);
+            }
+            else if (this.mouseDown && (node.state === State.WALL || node.state === State.UNVISITED))
             {
                 node.toggleWall();
             }

@@ -1,4 +1,4 @@
-const myGrid = new Grid(75,28);
+const myGrid = new Grid(76,28);
 myGrid.draw();
 
 function visualizeAlgorithm()
@@ -62,7 +62,8 @@ function animateShortestPath(order, animationDelay)
 function resetGrid()
 {
     stopAllAnimations();
-    myGrid.reset(true);
+    clearWalls();
+    myGrid.draw();
 }
 
 function clearWalls()
