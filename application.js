@@ -4,7 +4,7 @@ myGrid.draw();
 function visualizeAlgorithm()
 {
     clearPath();
-
+    myGrid.lock();
     try
     {
         let menu = document.getElementById('algorithmDropdown');
@@ -57,6 +57,7 @@ function animateShortestPath(order, animationDelay)
     {
         setTimeout(() => order[index].setState(State.HIGHLIGHT), animationDelay * index);
     }
+    myGrid.unlock();
 }
 
 function resetGrid()

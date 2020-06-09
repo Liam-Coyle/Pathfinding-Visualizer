@@ -9,6 +9,7 @@ class Grid
         this.targetNode = null;
         this.draggingStart = false;
         this.draggingTarget = false;
+        this.locked = false;
         this.nodes = Grid.buildBlankGrid(this.width, this.height);
     }
 
@@ -87,8 +88,11 @@ class Grid
             }
             else if (node.state === State.WALL || node.state === State.UNVISITED)
             {
-                this.mouseDown = true;
-                node.toggleWall();
+                if (!this.locked)
+                {
+                    this.mouseDown = true;
+                    node.toggleWall();
+                }
             }
         });
 
@@ -110,31 +114,37 @@ class Grid
 
     setStart(node)
     {
-        if (this.startNode === null)
+        if (!this.locked)
         {
-            node.makeStart();
-            this.startNode = node;
-        }
-        else
-        {
-            this.startNode.setState(State.UNVISITED);
-            node.makeStart();
-            this.startNode = node;
+            if (this.startNode === null)
+            {
+                node.makeStart();
+                this.startNode = node;
+            }
+            else
+            {
+                this.startNode.setState(State.UNVISITED);
+                node.makeStart();
+                this.startNode = node;
+            }
         }
     }
 
     setTarget(node)
     {
-        if (this.targetNode === null)
+        if (!this.locked)
         {
-            node.makeTarget();
-            this.targetNode = node;
-        }
-        else
-        {
-            this.targetNode.setState(State.UNVISITED);
-            node.makeTarget();
-            this.targetNode = node;
+            if (this.targetNode === null)
+            {
+                node.makeTarget();
+                this.targetNode = node;
+            }
+            else
+            {
+                this.targetNode.setState(State.UNVISITED);
+                node.makeTarget();
+                this.targetNode = node;
+            }
         }
     }
 
@@ -183,6 +193,7 @@ class Grid
 
     reset(removeStartAndTarget)
     {
+        this.unlock();
         for (let row = 0; row < this.height; row++)
         {
             for (let column = 0; column < this.width; column++)
@@ -207,6 +218,7 @@ class Grid
 
     clearPath()
     {
+        this.unlock();
         for (let row = 0; row < this.height; row++)
         {
             for (let column = 0; column < this.width; column++)
@@ -218,5 +230,15 @@ class Grid
                 }
             }
         }
+    }
+
+    lock()
+    {
+        this.locked = true;
+    }
+
+    unlock()
+    {
+        this.locked = false;
     }
 }
