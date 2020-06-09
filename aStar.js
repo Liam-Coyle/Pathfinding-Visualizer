@@ -10,7 +10,7 @@ function runAStarAlgorithm(grid)
 {
     if (grid == null || grid.startNode === null || grid.targetNode == null)
     {
-        return [null, null, null]; //TODO: Change this to throw exception
+        throw ('Invalid grid');
     }
 
     let gCosts = new Map();

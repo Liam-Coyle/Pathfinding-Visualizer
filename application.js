@@ -3,8 +3,11 @@ myGrid.draw();
 
 function visualizeDijkstras()
 {
-    [costs, order, previousNodes] = runDijkstrasAlgorithm(myGrid);
-    if (order === null)
+    try
+    {
+        [costs, order, previousNodes] = runDijkstrasAlgorithm(myGrid);
+    }
+    catch (err)
     {
         return;
     }
@@ -19,8 +22,11 @@ function visualizeDijkstras()
 
 function visualizeAStar()
 {
-    [gCosts, order, previousNodes] = runAStarAlgorithm(myGrid);
-    if (order === null)
+    try
+    {
+        [costs, order, previousNodes] = runAStarAlgorithm(myGrid);
+    }
+    catch (err)
     {
         return;
     }
