@@ -9,7 +9,7 @@ class QueueElement {
     } 
 } 
 
-class PriorityQueue { 
+class MinPriorityQueue { 
     constructor() 
     { 
         this.items = []; 

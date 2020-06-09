@@ -15,7 +15,7 @@ function runDijkstrasAlgorithm(grid)
 
     let gCosts = new Map();
     let previousNodes = new Map();
-    let underConsideration = new PriorityQueue();
+    let underConsideration = new MinPriorityQueue();
     let visitedNodesInOrder = [];
 
     setInitialGCosts();

@@ -16,7 +16,7 @@ function runAStarAlgorithm(grid)
     let gCosts = new Map();
     let hCosts = new Map();
     let previousNodes = new Map();
-    let underConsideration = new PriorityQueue();
+    let underConsideration = new MinPriorityQueue();
     let visitedNodesInOrder = [];
 
     setInitialCosts();
