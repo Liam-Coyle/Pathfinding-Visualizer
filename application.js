@@ -52,19 +52,17 @@ function getShortestPathOrder(previousNodesMap, endNode)
 {
     let order = [];
     let prev = previousNodesMap.get(endNode);
-    order.push(prev);
-    do
+    while(prev != null)
     {
+        order.splice(0, 0, prev);
         prev = previousNodesMap.get(prev);
-        order.push(prev);
     }
-    while(prev != null);
     return order;
 }
 
 function animateShortestPath(order, animationDelay)
 {
-    for (let index = 0; index < order.length - 2; index++)
+    for (let index = 1; index < order.length; index++)
     {
         setTimeout(() => order[index].setState(State.HIGHLIGHT), animationDelay * index);
     }
