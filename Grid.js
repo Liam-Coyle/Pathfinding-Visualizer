@@ -120,9 +120,23 @@ class Grid
     {
         if (!this.locked)
         {
-            this.replacedCellState = node.state;
-            node.makeStart();
-            this.startNode = node;
+            if (this.draggingStart)
+            {
+                this.replacedCellState = node.state;
+                node.makeStart();
+                this.startNode = node;
+            }
+            else if (this.startNode === null)
+            {
+                node.makeStart();
+                this.startNode = node;
+            }
+            else
+            {
+                this.startNode.setState(State.UNVISITED);
+                node.makeStart();
+                this.startNode = node;
+            }
         }
     }
 
@@ -130,9 +144,23 @@ class Grid
     {
         if (!this.locked)
         {
-            this.replacedCellState = node.state;
-            node.makeTarget();
-            this.targetNode = node;
+            if (this.draggingTarget)
+            {
+                this.replacedCellState = node.state;
+                node.makeTarget();
+                this.targetNode = node;
+            }
+            else if (this.targetNode === null)
+            {
+                node.makeTarget();
+                this.targetNode = node;
+            }
+            else
+            {
+                this.targetNode.setState(State.UNVISITED);
+                node.makeTarget();
+                this.targetNode = node;
+            }
         }
     }
 
