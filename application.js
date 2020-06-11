@@ -26,7 +26,7 @@ function visualizeAlgorithm()
 
 function visualizeMazeAlgorithm()
 {
-    clearWalls();
+    resetGrid();
     myGrid.lock();
     let wallOrder;
 
