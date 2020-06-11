@@ -9,6 +9,7 @@ class Grid
         this.targetNode = null;
         this.draggingStart = false;
         this.draggingTarget = false;
+        this.replacedCellState = State.UNVISITED;
         this.locked = false;
         this.nodes = Grid.buildBlankGrid(this.width, this.height);
     }
@@ -69,6 +70,7 @@ class Grid
             this.mouseDown = false
             this.draggingStart = false;
             this.draggingTarget = false;
+            this.replacedCellState = State.UNVISITED;
         });
     }
 
@@ -77,7 +79,7 @@ class Grid
     //@param node The Node object which corresponds to the given cell
     addListeners(cell, node)
     {
-        cell.addEventListener('mousedown', e => {
+        cell.addEventListener('mousedown', () => {
             if (node.state === State.START)
             {
                 this.draggingStart = true;
@@ -97,12 +99,14 @@ class Grid
         });
 
         cell.addEventListener('mouseover', () => {
-            if (this.draggingStart)
+            if (this.draggingStart && node != this.targetNode)
             {
+                this.startNode.setState(this.replacedCellState);
                 this.setStart(node);
             }
-            else if (this.draggingTarget)
+            else if (this.draggingTarget && node != this.startNode)
             {
+                this.targetNode.setState(this.replacedCellState);
                 this.setTarget(node);
             }
             else if (this.mouseDown && (node.state === State.WALL || node.state === State.UNVISITED))
@@ -116,17 +120,9 @@ class Grid
     {
         if (!this.locked)
         {
-            if (this.startNode === null)
-            {
-                node.makeStart();
-                this.startNode = node;
-            }
-            else
-            {
-                this.startNode.setState(State.UNVISITED);
-                node.makeStart();
-                this.startNode = node;
-            }
+            this.replacedCellState = node.state;
+            node.makeStart();
+            this.startNode = node;
         }
     }
 
@@ -134,17 +130,9 @@ class Grid
     {
         if (!this.locked)
         {
-            if (this.targetNode === null)
-            {
-                node.makeTarget();
-                this.targetNode = node;
-            }
-            else
-            {
-                this.targetNode.setState(State.UNVISITED);
-                node.makeTarget();
-                this.targetNode = node;
-            }
+            this.replacedCellState = node.state;
+            node.makeTarget();
+            this.targetNode = node;
         }
     }
 
