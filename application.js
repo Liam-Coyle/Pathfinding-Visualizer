@@ -1,4 +1,4 @@
-const myGrid = new Grid(76,28);
+const myGrid = new Grid(75,27);
 myGrid.draw();
 
 function visualizeAlgorithm()
@@ -7,7 +7,7 @@ function visualizeAlgorithm()
     myGrid.lock();
     try
     {
-        let menu = document.getElementById('algorithmDropdown');
+        let menu = document.getElementById('pathfindingDropdown');
         let algorithm = window[menu.options[menu.selectedIndex].value];
         [costs, order, previousNodes] = algorithm(myGrid);
     }
@@ -17,11 +17,44 @@ function visualizeAlgorithm()
     }
 
     let visitedNodesAnimationDelay = 10;
-    let shortestPathAnimationDelay = 10;
+    let shortestPathAnimationDelay = 20;
 
     let targetNodeIndex = animateVisitedNodes(order, visitedNodesAnimationDelay);
     let shortestPathOrder = getShortestPathOrder(previousNodes, myGrid.targetNode);
     setTimeout(() => animateShortestPath(shortestPathOrder, shortestPathAnimationDelay), targetNodeIndex * visitedNodesAnimationDelay); //Could use promises here?
+}
+
+function visualizeMazeAlgorithm()
+{
+    clearWalls();
+    myGrid.lock();
+    let wallOrder;
+
+    try
+    {
+        let menu = document.getElementById('mazeDropdown');
+        let algorithm = window[menu.options[menu.selectedIndex].value];
+        wallOrder = algorithm(myGrid, 1, 1, myGrid.width - 2, myGrid.height - 2, getSplitOrientation(myGrid.width, myGrid.height), myGrid.drawBorder());
+    }
+    catch (err)
+    {
+        return;
+    }
+
+    let animationDelay = 10;
+    animateMaze(wallOrder, animationDelay);
+}
+
+function getShortestPathOrder(previousNodesMap, endNode)
+{
+    let order = [];
+    let prev = previousNodesMap.get(endNode);
+    while(prev != null)
+    {
+        order.splice(0, 0, prev);
+        prev = previousNodesMap.get(prev);
+    }
+    return order;
 }
 
 function animateVisitedNodes(order, animationDelay)
@@ -39,25 +72,22 @@ function animateVisitedNodes(order, animationDelay)
     return targetNodeIndex;
 }
 
-function getShortestPathOrder(previousNodesMap, endNode)
-{
-    let order = [];
-    let prev = previousNodesMap.get(endNode);
-    while(prev != null)
-    {
-        order.splice(0, 0, prev);
-        prev = previousNodesMap.get(prev);
-    }
-    return order;
-}
-
 function animateShortestPath(order, animationDelay)
 {
+    setTimeout(() => myGrid.unlock(), animationDelay * order.length);
     for (let index = 1; index < order.length; index++)
     {
         setTimeout(() => order[index].setState(State.HIGHLIGHT), animationDelay * index);
     }
-    myGrid.unlock();
+}
+
+function animateMaze(order, animationDelay)
+{
+    setTimeout(() => myGrid.unlock(), animationDelay * order.length);
+    for (let index = 0; index < order.length; index++)
+    {
+        setTimeout(() => order[index].setState(State.WALL), animationDelay * index);
+    }
 }
 
 function resetGrid()

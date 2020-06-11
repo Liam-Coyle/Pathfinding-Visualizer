@@ -9,6 +9,7 @@
         <script defer src = "State.js"></script>
         <script defer src = "dijkstras.js"></script>
         <script defer src = "aStar.js"></script>
+        <script defer src = "recursiveDivision.js"></script>
         <script defer src = "application.js"></script>
         <link rel="stylesheet" href="style.css">
     </head>
@@ -16,12 +17,18 @@
         <div class = "wrapper">
             <ul id = "controlPanel">
                 <li>
-                    <select name="algorithmDropdown" id="algorithmDropdown" class = "option">
+                    <select name="pathfindingDropdown" id="pathfindingDropdown" class = "option">
                         <option value = "runDijkstrasAlgorithm">Dijkstras</option>
                         <option value = "runAStarAlgorithm">A*</option>
                     </select>
                 </li>
                 <li><button class = "option" onclick = "visualizeAlgorithm();">Visualize</button></li>
+                    <li>
+                        <select name="mazeDropdown" id="mazeDropdown" class = "option">
+                            <option value = "recursiveDivision">Recursive Division</option>
+                        </select>
+                    </li>
+                <li><button class = "option" onclick = "visualizeMazeAlgorithm();">Generate Maze</button></li>
                 <li><button class = "option" onclick = "resetGrid();">Reset grid</button></li>
                 <li><button class = "option" onclick = "clearWalls();">Clear walls</button></li>
                 <li><button class = "option" onclick = "clearPath();">Clear path</button></li>

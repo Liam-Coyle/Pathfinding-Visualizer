@@ -60,8 +60,8 @@ class Grid
             }
         }
 
-        this.setStart(myGrid.nodes[14][19]); //TODO: Make dynamic
-        this.setTarget(myGrid.nodes[14][57]);
+        this.setStart(myGrid.nodes[15][19]); //TODO: Make dynamic
+        this.setTarget(myGrid.nodes[15][57]);
 
         //Single mouseup event added to document rather than every cell
         document.addEventListener('mouseup', () => 
@@ -240,5 +240,21 @@ class Grid
     unlock()
     {
         this.locked = false;
+    }
+
+    drawBorder()
+    {
+        let order = [];
+        for (let row = 0; row < this.height; row++)
+        {
+            order.push(this.nodes[row][0]);
+            order.push(this.nodes[row][this.width - 1]);
+        }
+        for (let column = 1; column < this.width - 1; column++)
+        {
+            order.push(this.nodes[0][column]);
+            order.push(this.nodes[this.height - 1][column]);
+        }
+        return order;
     }
 }
