@@ -99,12 +99,12 @@ class Grid
         });
 
         cell.addEventListener('mouseover', () => {
-            if (this.draggingStart && node != this.targetNode)
+            if (this.draggingStart && node != this.targetNode && !this.locked)
             {
                 this.startNode.setState(this.replacedCellState);
                 this.setStart(node);
             }
-            else if (this.draggingTarget && node != this.startNode)
+            else if (this.draggingTarget && node != this.startNode && !this.locked)
             {
                 this.targetNode.setState(this.replacedCellState);
                 this.setTarget(node);
