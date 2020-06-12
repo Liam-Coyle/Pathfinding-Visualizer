@@ -1,3 +1,6 @@
+/**
+ * Represents the possible states of a node
+ */
 const State = 
 {
     UNVISITED: 'unvisited',
