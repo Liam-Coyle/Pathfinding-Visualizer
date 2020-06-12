@@ -67,7 +67,7 @@ function getSplitOrientation(width, height)
     }
     else
     {
-        getRandomNumber(0, 1) === 0 ? HORIZONTAL : VERTICAL;
+        return getRandomNumber(0, 1) === 0 ? HORIZONTAL : VERTICAL;
     }
 }
 
