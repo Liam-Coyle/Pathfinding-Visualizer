@@ -64,7 +64,7 @@ function runAStarAlgorithm(grid)
      */
     function tryToFindBetterPath(nodeA, nodeB) 
     {
-        let costOfPathFromCurrentNode = gCosts.get(nodeA) + grid.getDistance(nodeA, nodeB);
+        let costOfPathFromCurrentNode = gCosts.get(nodeA) + grid.getManhattanDistance(nodeA, nodeB);
         if (costOfPathFromCurrentNode < gCosts.get(nodeB)) 
         {
             gCosts.set(nodeB, costOfPathFromCurrentNode);
@@ -88,11 +88,11 @@ function runAStarAlgorithm(grid)
                 if (thisNode != grid.startNode) 
                 {
                     gCosts.set(thisNode, Infinity);
-                    hCosts.set(thisNode, grid.getDistance(grid.targetNode, thisNode));
+                    hCosts.set(thisNode, grid.getManhattanDistance(grid.targetNode, thisNode));
                 }
             }
         }
         gCosts.set(grid.startNode, 0);
-        hCosts.set(grid.startNode, grid.getDistance(grid.targetNode, grid.startNode));
+        hCosts.set(grid.startNode, grid.getManhattanDistance(grid.targetNode, grid.startNode));
     }
 }

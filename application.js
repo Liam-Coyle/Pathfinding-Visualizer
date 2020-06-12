@@ -1,4 +1,4 @@
-const myGrid = new Grid(75,27);
+const myGrid = new Grid('grid', 75, 27);
 myGrid.draw();
 
 function visualizeAlgorithm()

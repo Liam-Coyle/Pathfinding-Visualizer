@@ -62,7 +62,7 @@ function runDijkstrasAlgorithm(grid)
      */
     function tryToFindBetterPath(nodeA, nodeB) 
     {
-        let costOfPathFromCurrentNode = gCosts.get(nodeA) + grid.getDistance(nodeA, nodeB);
+        let costOfPathFromCurrentNode = gCosts.get(nodeA) + grid.getManhattanDistance(nodeA, nodeB);
         if (costOfPathFromCurrentNode < gCosts.get(nodeB)) 
         {
             gCosts.set(nodeB, costOfPathFromCurrentNode);
