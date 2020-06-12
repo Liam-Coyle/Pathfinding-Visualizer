@@ -118,7 +118,7 @@ class Grid
     /**
      * Adds event listeners to a cell
      * @param {String} cell The HTML td cell which event listeners should be added to
-     * @param {Object} node The Node object which corresponds to the cell
+     * @param {Node} node The Node object which corresponds to the cell
      */
     addListeners(cell, node)
     {
@@ -171,7 +171,7 @@ class Grid
 
     /**
      * Sets the start node of a grid
-     * @param {Object} node The node to set
+     * @param {Node} node The node to set
      */
     setStart(node)
     {
@@ -197,7 +197,7 @@ class Grid
 
     /**
      * Sets the target node of a grid
-     * @param {Object} node The node to set
+     * @param {Node} node The node to set
      */
     setTarget(node)
     {
@@ -223,7 +223,7 @@ class Grid
 
     /**
      * Splits the string position of a Node into 2 corresponding integers
-     * @param {Object} node The node to get the position of
+     * @param {Node} node The node to get the position of
      * @return {Array} Array in the order [row, column]
      */
     getNodePositionAsInt(node)
@@ -241,7 +241,7 @@ class Grid
 
     /**
      * Gets the neighbours of a node (Above, right, below, left)
-     * @param {Object} node The node to get the neighbours of
+     * @param {Node} node The node to get the neighbours of
      * @return {Array} Array of neighbouring nodes in the order [Above, Right, Below, Left]
      */
     getNeighboursOfNode(node)
@@ -263,8 +263,8 @@ class Grid
 
     /**
      * Calculates the manhattan distance between 2 nodes
-     * @param {Object} nodeA 
-     * @param {Object} nodeB 
+     * @param {Node} nodeA 
+     * @param {Node} nodeB 
      */
     getManhattanDistance(nodeA, nodeB)
     {
