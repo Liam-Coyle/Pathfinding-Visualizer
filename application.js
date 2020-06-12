@@ -1,6 +1,9 @@
 const myGrid = new Grid('grid', 75, 27);
 myGrid.draw();
 
+/**
+ * Visualizes the selected pathfinding algorithm
+ */
 function visualizeAlgorithm()
 {
     clearPath();
@@ -24,6 +27,9 @@ function visualizeAlgorithm()
     setTimeout(() => animateShortestPath(shortestPathOrder, shortestPathAnimationDelay), targetNodeIndex * visitedNodesAnimationDelay); //Could use promises here?
 }
 
+/**
+ * Visualizes the selected maze generation algorithm
+ */
 function visualizeMazeAlgorithm()
 {
     resetGrid();
@@ -45,10 +51,26 @@ function visualizeMazeAlgorithm()
     animateMaze(wallOrder, animationDelay);
 }
 
-function getShortestPathOrder(previousNodesMap, endNode)
+/**
+ * Arranges an array with the order of nodes which together make up the shortest path
+ * @param {Map<Node, Node>} previousNodesMap Map(node, previousNode) mapping each node to the node they came from
+ * @param {Node} targetNode The target node
+ * @return {Array<Node>} Array of nodes from startNode to targetNode which make up the shortest path
+ */
+function getShortestPathOrder(previousNodesMap, targetNode)
 {
+    if (previousNodesMap === null)
+    {
+        throw ('previousNodesMap cannot be null');
+    }
+
+    if (targetNode === null)
+    {
+        throw ('targetNode cannot be null');
+    }
+
     let order = [];
-    let prev = previousNodesMap.get(endNode);
+    let prev = previousNodesMap.get(targetNode);
     while(prev != null)
     {
         order.splice(0, 0, prev);
@@ -57,8 +79,23 @@ function getShortestPathOrder(previousNodesMap, endNode)
     return order;
 }
 
+/**
+ * Updates the state of each node to visited in the given order
+ * @param {Array<Node>} order An array of nodes in the order of the desired animation
+ * @param {Number} animationDelay The delay in ms between each animation
+ */
 function animateVisitedNodes(order, animationDelay)
 {
+    if (order === null)
+    {
+        throw ('order cannot be null');
+    }
+
+    if (animationDelay < 0)
+    {
+        throw ('animationDelay must be >= 0');
+    }
+
     let targetNodeIndex = null;
     for (let index = 1; index < order.length; index++)
     {
@@ -72,8 +109,23 @@ function animateVisitedNodes(order, animationDelay)
     return targetNodeIndex;
 }
 
+/**
+ * Updates the state of each node to highlight in the given order
+ * @param {Array<Node>} order An array of nodes in the order of the desired animation
+ * @param {Number} animationDelay The delay in ms between each animation
+ */
 function animateShortestPath(order, animationDelay)
 {
+    if (order === null)
+    {
+        throw ('order cannot be null');
+    }
+
+    if (animationDelay < 0)
+    {
+        throw ('animationDelay must be >= 0');
+    }
+
     setTimeout(() => myGrid.unlock(), animationDelay * order.length);
     for (let index = 1; index < order.length; index++)
     {
@@ -81,8 +133,23 @@ function animateShortestPath(order, animationDelay)
     }
 }
 
+/**
+ * Updates the state of each node to wall in the given order
+ * @param {Array<Node>} order An array of nodes in the order of the desired animation
+ * @param {Number} animationDelay The delay in ms between each animation
+ */
 function animateMaze(order, animationDelay)
 {
+    if (order === null)
+    {
+        throw ('order cannot be null');
+    }
+
+    if (animationDelay < 0)
+    {
+        throw ('animationDelay must be >= 0');
+    }
+
     setTimeout(() => myGrid.unlock(), animationDelay * order.length);
     for (let index = 0; index < order.length; index++)
     {
@@ -90,6 +157,9 @@ function animateMaze(order, animationDelay)
     }
 }
 
+/**
+ * Resets the grid to it's inital state
+ */
 function resetGrid()
 {
     stopAllAnimations();
@@ -97,18 +167,27 @@ function resetGrid()
     myGrid.draw();
 }
 
+/**
+ * Sets all wall nodes to state of unvisited
+ */
 function clearWalls()
 {
     stopAllAnimations();
     myGrid.reset(false);
 }
 
+/**
+ * Sets all highlight/visited nodes to state of unvisited
+ */
 function clearPath() 
 {
     stopAllAnimations();
     myGrid.clearPath();
 }
 
+/**
+ * Stops all currently running animations
+ */
 function stopAllAnimations()
 {
     var id = window.setTimeout(function() {}, 0);
