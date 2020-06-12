@@ -1,7 +1,7 @@
 /**
  * Runs A* algorithm on a grid.
- * @param {Object} grid Grid object to run A* algorithm on.
- * @return {array} Array containing:
+ * @param {Grid} grid Grid object to run A* algorithm on.
+ * @return {Array} Array containing:
  * 1. gCosts: Map(node, gCost) (gCost = Cost of reaching a node from the start node).
  * 2. visitedNodesInOrder: Array of visited nodes in order they were visited.
  * 3. previousNodes: Map(node, previousNode) mapping each node to the node they came from.
@@ -41,15 +41,19 @@ function runAStarAlgorithm(grid)
             }
         }
     }
-
     return [gCosts, visitedNodesInOrder, previousNodes];
 
     /**
      * Adds a node to the 'underConsideration' PriorityQueue if it is not already there.
-     * @param {Object} node 
+     * @param {Node} node The node to add
      */
     function considerIfNotAlreadyBeingConsidered(node) 
     {
+        if (node === null)
+        {
+            throw ('node cannot be null');
+        }
+
         if (!(underConsideration.containsInnerElement(node))) 
         {
             underConsideration.enqueue(node, gCosts.get(node) + hCosts.get(node));
@@ -59,11 +63,16 @@ function runAStarAlgorithm(grid)
     /**
      * Tries to find a path to nodeB via nodeA, with a lower gCost than the currently known path.
      * If successful, the new gCost of nodeB is updated.
-     * @param {Object} nodeA The node from which the possible new path is via.
-     * @param {Object} nodeB The node which is trying to improve it's gCost.
+     * @param {Node} nodeA The node from which the possible new path is via.
+     * @param {Node} nodeB The node which is trying to improve it's gCost.
      */
     function tryToFindBetterPath(nodeA, nodeB) 
     {
+        if (nodeA === null || nodeB === null)
+        {
+            throw ('node cannot be null');
+        }
+
         let costOfPathFromCurrentNode = gCosts.get(nodeA) + grid.getManhattanDistance(nodeA, nodeB);
         if (costOfPathFromCurrentNode < gCosts.get(nodeB)) 
         {
