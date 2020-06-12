@@ -9,8 +9,8 @@ const VERTICAL = 1;
  * @param {Number} width The width of the section
  * @param {Number} height The height of the section
  * @param {Boolean} orientation The orientation of the cut to be made to the section (HORIZONTAL = 0, VERTICAL = 1)
- * @param {Array} wallOrder An array containing the order of the walls added thus far
- * @return {Array} wallOrder An array containing the order of the walls added thus far
+ * @param {Array<Node>} wallOrder An array containing the order of the walls added thus far
+ * @return {Array<Node>} wallOrder An array containing the order of the walls added thus far
  */
 function recursiveDivision(grid, col, row, width, height, orientation, wallOrder)
 {    
@@ -54,7 +54,7 @@ function recursiveDivision(grid, col, row, width, height, orientation, wallOrder
  * @param {Number} width The width of the section
  * @param {Number} height The height of the section
  * @param {Boolean} orientation The orientation of the cut to be made to the section (HORIZONTAL = 0, VERTICAL = 1)
- * @param {Array} wallOrder An array containing the order of the walls added thus far
+ * @param {Array<Node>} wallOrder An array containing the order of the walls added thus far
  */
 function checkIfParametersAreValid(grid, col, row, width, height, orientation, wallOrder) 
 {
@@ -105,7 +105,7 @@ function checkIfParametersAreValid(grid, col, row, width, height, orientation, w
  * @param {Number} hCol The column to carve a hole in the wall
  * @param {Number} hRow The row to carve a hole in the wall
  * @param {Boolean} orientation The orientation of the cut to be made to the section (HORIZONTAL = 0, VERTICAL = 1)
- * @param {Array} wallOrder An array containing the order of the walls added thus far
+ * @param {Array<Node>} wallOrder An array containing the order of the walls added thus far
  */
 function drawWall(grid, width, height, wCol, wRow, hCol, hRow, orientation, wallOrder) 
 {

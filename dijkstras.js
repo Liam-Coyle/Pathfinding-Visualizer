@@ -1,7 +1,7 @@
 /**
  * Runs Dijkstras algorithm on a grid.
  * @param {Grid} grid Grid object to run Dijkstras algorithm on.
- * @return {Array} Array containing:
+ * @return {Array<Map<Node, Number>, Array<Node>, Map<Node, Node>} Array containing:
  * 1. gCosts: Map(node, gCost) (gCost = Cost of reaching a node from the start node).
  * 2. visitedNodesInOrder: Array of visited nodes in order they were visited.
  * 3. previousNodes: Map(node, previousNode) mapping each node to the node they came from.
