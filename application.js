@@ -4,14 +4,13 @@ myGrid.draw();
 /**
  * Visualizes the selected pathfinding algorithm
  */
-function visualizeAlgorithm()
+function visualizeAlgorithm(algorithm)
 {
     clearPath();
     myGrid.lock();
     try
-    {
-        let menu = document.getElementById('pathfindingDropdown');
-        let algorithm = window[menu.options[menu.selectedIndex].value];
+    {   
+        algorithm = window[algorithm];
         [costs, order, previousNodes] = algorithm(myGrid);
     }
     catch (err)
@@ -30,7 +29,7 @@ function visualizeAlgorithm()
 /**
  * Visualizes the selected maze generation algorithm
  */
-function visualizeMazeAlgorithm()
+function visualizeMazeAlgorithm(algorithm)
 {
     resetGrid();
     myGrid.lock();
@@ -38,8 +37,7 @@ function visualizeMazeAlgorithm()
 
     try
     {
-        let menu = document.getElementById('mazeDropdown');
-        let algorithm = window[menu.options[menu.selectedIndex].value];
+        algorithm = window[algorithm];
         wallOrder = algorithm(myGrid, 1, 1, myGrid.width - 2, myGrid.height - 2, getSplitOrientation(myGrid.width, myGrid.height), myGrid.drawBorder());
     }
     catch (err)
