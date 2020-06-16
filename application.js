@@ -195,6 +195,10 @@ function stopAllAnimations()
     }
 }
 
+/**
+ * Opens the 'More info' modal with correct information
+ * @param {String} algorithm The algorithm which is being explained
+ */
 function openMoreInfo(algorithm)
 {
     let name = document.getElementById('algorithm-name');
@@ -217,11 +221,15 @@ function openMoreInfo(algorithm)
     document.getElementById('moreInfo').style.display = 'block';
 }
 
+/**
+ * Closes the 'More info' modal
+ */
 function closeMoreInfo()
 {
     document.getElementById('moreInfo').style.display = 'none';
 }
 
+//When the user clicks off the modal, close it.
 window.onclick = (e) => {
     let modal = document.getElementById('moreInfo');
     if (e.target == modal) 
