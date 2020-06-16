@@ -194,3 +194,38 @@ function stopAllAnimations()
         window.clearTimeout(id);
     }
 }
+
+function openMoreInfo(algorithm)
+{
+    let name = document.getElementById('algorithm-name');
+    let info = document.getElementById('algorithm-info');
+    switch (algorithm)
+    {
+        case 'dijkstras':
+            name.innerHTML = 'Dijkstra\'s Algorithm';
+            info.innerHTML = '<p>Description coming soon...</p>';
+            break;
+        case 'aStar':
+            name.innerHTML = 'A* Algorithm';
+            info.innerHTML = '<p>Description coming soon...</p>';
+            break;
+        case 'recursiveDivision':
+            name.innerHTML = 'Recursive Division Algorithm';
+            info.innerHTML = '<p>Description coming soon...</p>'
+            break;
+    }
+    document.getElementById('moreInfo').style.display = 'block';
+}
+
+function closeMoreInfo()
+{
+    document.getElementById('moreInfo').style.display = 'none';
+}
+
+window.onclick = (e) => {
+    let modal = document.getElementById('moreInfo');
+    if (e.target == modal) 
+    {
+        modal.style.display = "none";
+    }
+}

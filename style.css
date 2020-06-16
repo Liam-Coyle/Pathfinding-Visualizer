@@ -8,7 +8,6 @@
 
 .wrapper {
     margin: auto;
-    width: 95%;
     overflow: hidden;
 }
 
@@ -21,7 +20,7 @@
 
 .navBar {
     width: 100%;
-    background-color: #34495e;
+    background-color: #222222;
     overflow: hidden;
 }
 
@@ -32,6 +31,31 @@
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
+}
+
+#key {
+    width: 100%;
+    height: 15%;
+    overflow: hidden;
+    display: block;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#key li {
+    margin: auto;
+    font-size: 16px;
+    color: #222222;
+    padding: 14px 16px;
+    list-style: none;
+    display: inline-block;
+}
+
+#key li div {
+    height: 25px;
+    width: 25px;
+    display: inline-block;
+    margin-bottom: -5%;
 }
 
 .dropdown {
@@ -48,22 +72,36 @@
 }
 
 .dropdown-content {
-    /* display: block; */
     display: none;
     position: absolute;
-    background-color: #34495e;
+    background-color: #222222;
     overflow: auto;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
 }
 
 .dropdown-content a {
+    display: inline-block;
     float: none;
     color: white;
     padding: 12px 16px;
     text-decoration: none;
-    display: block;
     text-align: left;
+}
+
+.dropdown-content svg {
+    margin-right: 10px;
+    margin-top: 10px;
+    float: right;
+    cursor: pointer;
+}
+
+.dropdown-content svg path {
+    fill: white;
+}
+
+.dropdown-content svg:hover path {
+    fill: #ff7931;
 }
 
 .dropdown:hover .dropdown-content {
@@ -71,18 +109,14 @@
 }
 
 .navBar a:hover, .dropdown:hover .dropbtn {
-    color: #16a085;
+    color: #ff7931;
     cursor: pointer;
 }
 
-.navBar a:active, .dropdown-content a:active {
+.navBar a:active, .dropdown-content a:active, .dropdown-content svg:active {
     transform: scale(0.9);
 }
 
-#key {
-    width: 100%;
-    height: 25px;
-}
 
 #grid td {
     user-select: none;
@@ -92,17 +126,17 @@
 }
 
 .visited {
-    background-color: rgba(0, 190, 218, 0.75);
+    background-color: #ff7931;
     animation-name: visitedAnimation;
     animation-duration: 0.5s;
 }
 
 .unvisited {
-    border: 1px solid rgb(175, 216, 248);
+    border: 1px solid #f8d2bd;
 }
 
 .wall {
-    background-color: rgb(12, 53, 71);
+    background-color: #222222;
     animation-name: wallAnimation;
     animation-duration: 0.5s;
 }
@@ -125,77 +159,122 @@
     animation-duration: 0.5s;
 }
 
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4); 
+}
+
+.modal-content {
+    top: 10%;
+    z-index: 2;
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    width: 60%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+.modal-header {
+    padding: 20px 16px;
+    background-color: #ff7931;
+    color: white;
+}
+
+.close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover, .close:focus {
+    color: #222222;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-body {
+    padding: 20px 16px;
+}
+  
+.modal-footer {
+  padding: 10px 16px;
+  background-color: #ff7931;
+  color: white;
+}
+
+@keyframes animatetop {
+    from {top: -300px; opacity: 0}
+    to {top: 10%; opacity: 1}
+}
+
 @keyframes wallAnimation {
     0% {
         transform: scale(.3);
-        background-color: rgb(12, 53, 71);
     }
     50% {
         transform: scale(1.2);
-        background-color: rgb(12, 53, 71);
     }
     100% {
         transform: scale(1.0);
-        background-color: rgb(12, 53, 71);
     }
 }
 
 @keyframes startAnimation {
     0% {
         transform: scale(.3);
-        background-color: rgb(3, 187, 80);
     }
     50% {
         transform: scale(1.2);
-        background-color: rgb(3, 187, 80);
     }
     100% {
         transform: scale(1.0);
-        background-color:rgb(3, 187, 80);
     }
 }
 
 @keyframes targetAnimation {
     0% {
         transform: scale(.3);
-        background-color: rgb(187, 3, 18);
     }
     50% {
         transform: scale(1.2);
-        background-color: rgb(187, 3, 18);
     }
     100% {
         transform: scale(1.0);
-        background-color: rgb(187, 3, 18);
     }
 }
 
 @keyframes visitedAnimation {
     0% {
         transform: scale(.3);
-        background-color: rgba(0, 190, 218, 0.75);
     }
     50% {
         transform: scale(1.2);
-        background-color: rgba(0, 190, 218, 0.75);
     }
     100% {
         transform: scale(1.0);
-        background-color: rgba(0, 190, 218, 0.75);
     }
 }
 
 @keyframes highlightAnimation {
     0% {
         transform: scale(.3);
-        background-color: rgb(233, 250, 0);
     }
     50% {
         transform: scale(1.2);
-        background-color: rgb(233, 250, 0);
     }
     100% {
         transform: scale(1.0);
-        background-color: rgb(233, 250, 0);
     }
 }
