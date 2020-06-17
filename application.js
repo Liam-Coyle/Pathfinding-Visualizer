@@ -239,7 +239,7 @@ function openMoreInfo(algorithm)
             '<h3>Description</h3>' + 
             '<p>Mazes can be created with recursive division, an algorithm which works as follows: Begin with the maze\'s space with no walls. Call this a chamber. <b>Divide the chamber with a randomly positioned wall</b> (or multiple walls) <b>where each wall contains a randomly positioned passage opening within it. Then recursively repeat </b>the process on the subchambers until all chambers are minimum sized. This method results in mazes with long straight walls crossing their space, making it easier to see which areas to avoid.</p>' +  
             '<h3>Read more</h3>' + 
-            '<ul><li><a href = "https://en.wikipedia.org/wiki/Maze_generation_algorithm#Recursive_division_method">Wikipedia</a></li><li><a href = "http://weblog.jamisbuck.org/2011/1/12/maze-generation-recursive-division-algorithm">The Buckblog - Maze Generation: Recursive Division</a></li></ul>'
+            '<ul><li><a href = "https://en.wikipedia.org/wiki/Maze_generation_algorithm#Recursive_division_method">Wikipedia</a></li><li><a href = "http://weblog.jamisbuck.org/2011/1/12/maze-generation-recursive-division-algorithm">The Buckblog - Maze Generation: Recursive Division</a></li></ul>';
             break;
     }
     document.getElementById('moreInfo').style.display = 'block';
