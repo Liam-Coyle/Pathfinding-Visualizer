@@ -207,7 +207,17 @@ function openMoreInfo(algorithm)
     {
         case 'dijkstras':
             name.innerHTML = 'Dijkstra\'s Algorithm';
-            info.innerHTML = '<p>Description coming soon...</p>';
+            info.innerHTML = '<img src = dijkstras.gif></img>' + 
+            '<h3>Description</h3>' + 
+            '<p>This algorithm begins with a start node and an "open set" of candidate nodes. At each step, the node in the open set with the lowest distance from the start is examined. The node is marked "closed", and all nodes adjacent to it are added to the open set if they have not already been examined. This process repeats until a path to the destination has been found. Since the lowest distance nodes are examined first, the first time the destination is found, the path to it will be the shortest path.' +  
+            '<h3 id = "advHeader">+ Advantages</h3>' + 
+            '<ul id = "advantages"><li>Guarentees the shortest path</li><li>Can be used on weighted graphs</li><li>Only needs to run 1 time to calculate the shortest path from start node to every node on a graph</li><li>Can be made parallel</li></ul>' +
+            '<h3 id = "disHeader">- Disadvantages</h3>' +
+            '<ul id = "disadvantages"><li>Cannot handle negative edges</li><li>Time and resource consuming as it does a blind search</li></ul>' +
+            '<h3>Applications</h3>' +
+            '<ul><li>Geographical maps</li><li>Traffic information systems</li><li>Widely used in network routing protocols, e.g.Open Shortest Path First(OSPF) protocol</li><li>Telephone networks</li></ul>' + 
+            '<h3>Read more</h3>' + 
+            '<ul><li><a href = "https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm">Wikipedia</a></li><li><a href = "http://www-m3.ma.tum.de/foswiki/pub/MN0506/WebHome/dijkstra.pdf">A Note on Two Problems in Connexion with Graphs - E.W. Dijkstra</a></li><li><a href = "https://www.researchgate.net/publication/47842024_A_Parallelization_of_Dijkstra\'s_Shortest_Path_Algorithm">A Parallelization of Dijkstra\'s Shortest Path Algorithm</a></li><li><a href = "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_ospf/configuration/15-sy/iro-15-sy-book/iro-incre-spf.pdf">OSPF Incremental SPF</a></li></ul>'
             break;
         case 'aStar':
             name.innerHTML = 'A* Algorithm';
