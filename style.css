@@ -9,6 +9,7 @@
 .wrapper {
     margin: auto;
     overflow: hidden;
+    min-width: 630px;
 }
 
 #grid {
