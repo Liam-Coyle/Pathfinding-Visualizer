@@ -213,7 +213,7 @@ function openMoreInfo(algorithm)
             '<h3 id = "advHeader">+ Advantages</h3>' + 
             '<ul id = "advantages"><li>Guarentees the shortest path</li><li>Can be used on weighted graphs</li><li>Only needs to run 1 time to calculate the shortest path from start node to every node on a graph</li><li>Can be made parallel <sup>[1]</sup></li></ul>' +
             '<h3 id = "disHeader">- Disadvantages</h3>' +
-            '<ul id = "disadvantages"><li>Cannot handle negative edges</li><li>Time and resource consuming as it does a blind search</li></ul>' +
+            '<ul id = "disadvantages"><li>Cannot handle negative edges</li><li>Time and memory consuming as it does a blind search</li></ul>' +
             '<h3>Applications</h3>' +
             '<ul><li>Geographical maps</li><li>Traffic information systems</li><li>Widely used in network routing protocols, e.g.Open Shortest Path First(OSPF) protocol <sup>[2]</sup></li><li>Telephone networks</li></ul>' + 
             '<h3>Read more</h3>' + 
@@ -232,6 +232,34 @@ function openMoreInfo(algorithm)
             '<ul><li>Pathfinding in video games</li><li>Parsing using stochastic grammars in NLP <sup>[1]</sup></li><li>Informational search with online learning <sup>[2]</sup></li></ul>' + 
             '<h3>Read more</h3>' + 
             '<ul><li><a href = "https://en.wikipedia.org/wiki/A*_search_algorithm">Wikipedia</a></li><li><a href = "https://ieeexplore.ieee.org/document/4082128">A Formal Basis for the Heuristic Determination of Minimum Cost Paths</a></li><li><a href = "https://www.aclweb.org/anthology/N03-1016.pdf">A* Parsing: Fast Exact Viterbi Parse Selection <sup>[1]</sup></a></li><li><a href = "http://www.eng.tau.ac.il/~bengal/GTA.pdf">A group testing algorithm with online informational learning <sup>[2]</sup></a></li><li><a href = "https://en.wikipedia.org/wiki/Heuristic_(computer_science)">Heuristic (computer science) - Wikipedia</a><sup>[3]</sup></li><li><a href = "http://theory.stanford.edu/~amitp/GameProgramming/">Amit’s A* Pages</a></li></ul>';
+            break;
+            case 'breadthFirstSearch':
+                name.innerHTML = 'Breadth-First Search (BFS) Algorithm';
+                info.innerHTML = '<img src = breadthFirstSearch.gif></img>' + 
+                '<h3>Description</h3>' + 
+                '<p>Breadth-first search (BFS) is an algorithm for traversing or searching tree or graph data structures. <b>It starts at the tree root (or in this case, the graph start node), and explores all of the neighbor nodes at the present depth prior to moving on to the nodes at the next depth level.</b> It uses the opposite strategy as depth-first search, which instead explores the node branch as far as possible before being forced to backtrack and expand other nodes.</p>' +  
+                '<h3 id = "advHeader">+ Advantages</h3>' + 
+                '<ul id = "advantages"><li>Guarentees the shortest path</li><li>Performs well if the search space is small</li></ul>' +
+                '<h3 id = "disHeader">- Disadvantages</h3>' +
+                '<ul id = "disadvantages"><li>Cannot be used on a weighted graph</li><li>Time and memory consuming as it does a blind search</li><li>If solution is far away then it consumes time</li></ul>' +
+                '<h3>Applications</h3>' +
+                '<ul><li>Social networking websites to suggest people within a given distance</li><li>Copying garbage collection using Cheney\'s algorithm<sup>[1]</sup></li><li>Ford–Fulkerson method for computing the maximum flow in a flow network<sup>[2]</sup></li><li>Crawlers in search engines<sup>[3]</sup></li></ul>' + 
+                '<h3>Read more</h3>' + 
+                '<ul><li><a href = "https://en.wikipedia.org/wiki/Breadth-first_search">Wikipedia</a></li><li><a href = "https://en.wikipedia.org/wiki/Cheney%27s_algorithm">Cheney\'s algorithm</a><sup>[1]</sup></li><li><a href = "https://en.wikipedia.org/wiki/Ford%E2%80%93Fulkerson_algorithm">Ford-Fulkerson method</a><sup>[2]</sup></li><li><a href = "https://en.wikipedia.org/wiki/Web_crawler">Crawlers</a><sup>[3]</sup></li></ul>';
+                break;
+            case 'depthFirstSearch':
+            name.innerHTML = 'Depth-First Search (DFS) Algorithm';
+            info.innerHTML = '<img src = depthFirstSearch.gif></img>' + 
+            '<h3>Description</h3>' + 
+            '<p>Depth-first search (DFS) is an algorithm for traversing or searching tree or graph data structures. <b>The algorithm starts at the root node (or in this case, the start node) and explores as far as possible along each branch before backtracking.</b></p>' +  
+            '<h3 id = "advHeader">+ Advantages</h3>' + 
+            '<ul id = "advantages"><li>Faster and uses less memory than breadth-first search (BFS)<li>Potential to perform well when the solution (in this case, the target node) is very deep in the tree/graph (far away from the start node)</li></ul>' +
+            '<h3 id = "disHeader">- Disadvantages</h3>' +
+            '<ul id = "disadvantages"><li>Does not guarentee shortest path</li><li>May be inefficient when the target node is very close to the start node</li></ul>' +
+            '<h3>Applications</h3>' +
+            '<ul><li>Finding connected components<sup>[1]</sup></li><li>Topological sorting<sup>[2]</sup></li><li>Finding strongly connected components<sup>[3]</sup></li><li>Solving puzzles with only 1 solution such as mazes</li></ul>' + 
+            '<h3>Read more</h3>' + 
+            '<ul><li><a href = "https://en.wikipedia.org/wiki/Depth-first_search">Wikipedia</a></li><li><a href = "https://en.wikipedia.org/wiki/Component_(graph_theory)">Connected components</a><sup>[1]</sup></li><li><a href = "https://en.wikipedia.org/wiki/Topological_sorting">Topological sorting</a><sup>[2]</sup></li><li><a href= "https://www.geeksforgeeks.org/strongly-connected-components">Finding strongly connected components</a><sup>[3]</sup></li></ul>';
             break;
         case 'recursiveDivision':
             name.innerHTML = 'Recursive Division Algorithm';
