@@ -51,36 +51,3 @@ function runDepthFirstSearchAlgorithm(grid)
     }
     return [null, visitedNodesInOrder, previousNodes];
 }
-
-
-
-
-
-
-
-
-
-
-
-// let mostRecentlyVisitedNode = stack.pop();
-// visitedNodesInOrder.push(mostRecentlyVisitedNode);
-
-// for (let neighbour of grid.getNeighboursOfNode(mostRecentlyVisitedNode))
-// {
-//     if (neighbour == null || neighbour.state == State.WALL) 
-//     {
-//         continue;
-//     }
-
-//     if (!visitedNodesInOrder.includes(neighbour))
-//     {
-//         stack.push(neighbour);
-//         break;
-//     }
-
-//     // if (!stack.includes(neighbour) && !visitedNodesInOrder.includes(neighbour)) //TODO: Optimize this
-//     // {
-//     //     stack.push(neighbour);
-//     //     previousNodes.set(neighbour, mostRecentlyVisitedNode);
-//     // }
-// }
