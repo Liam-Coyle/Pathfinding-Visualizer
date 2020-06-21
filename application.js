@@ -279,7 +279,7 @@ function openMoreInfo(algorithm)
             name.innerHTML = 'Recursive Backtracking Algorithm';
             info.innerHTML = '<img src = recursiveBacktracking.gif></img>' + 
             '<h3>Description</h3>' + 
-            '<p>Mazes can be created using a recursive backtracking method, which works in the same way as Depth-First Search (DFS) works. It begins with a grid of walls rather than an empty grid. <b>The algorithms starts at the start node, and carves out a path in random directions until it gets stuck, before backtracking.</b></p>' +  
+            '<p>Mazes can be created using a recursive backtracking algorithm, which works in the same way as Depth-First Search (DFS). It begins with a grid of walls rather than an empty grid. <b>The algorithms starts at the start node, and carves out a path in random directions until it gets stuck, before backtracking.</b></p>' +  
             '<h3>Read more</h3>' + 
             '<ul><li><a href = "https://en.wikipedia.org/wiki/Maze_generation_algorithm#Recursive_backtracker">Wikipedia</a></li><li><a href = "https://weblog.jamisbuck.org/2010/12/27/maze-generation-recursive-backtracking">The Buckblog - Maze Generation: Recursive Backtracking</a></li></ul>';
             break;
