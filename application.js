@@ -33,6 +33,7 @@ function visualizeMazeAlgorithm(algorithm)
 {
     resetGrid();
     myGrid.lock();
+    let carvePath = algorithm === 'recursiveBacktracking' ? true : false;
     let wallOrder;
 
     try
@@ -46,7 +47,7 @@ function visualizeMazeAlgorithm(algorithm)
     }
 
     let animationDelay = 10;
-    animateMaze(wallOrder, animationDelay);
+    animateMaze(wallOrder, animationDelay, carvePath);
 }
 
 /**
@@ -135,8 +136,9 @@ function animateShortestPath(order, animationDelay)
  * Updates the state of each node to wall in the given order
  * @param {Array<Node>} order An array of nodes in the order of the desired animation
  * @param {Number} animationDelay The delay in ms between each animation
+ * @param {Boolean} carvePath Boolean value indicating to carve the path (true) or to place walls to construct the maze (false)
  */
-function animateMaze(order, animationDelay)
+function animateMaze(order, animationDelay, carvePath)
 {
     if (order === null)
     {
@@ -148,10 +150,14 @@ function animateMaze(order, animationDelay)
         throw ('animationDelay must be >= 0');
     }
 
+    let state = carvePath ? State.UNVISITED : State.WALL; 
     setTimeout(() => myGrid.unlock(), animationDelay * order.length);
     for (let index = 0; index < order.length; index++)
     {
-        setTimeout(() => order[index].setState(State.WALL), animationDelay * index);
+        if (order[index].state != State.START && order[index].state != State.TARGET)
+        {
+            setTimeout(() => order[index].setState(state), animationDelay * index);
+        }
     }
 }
 
@@ -269,6 +275,15 @@ function openMoreInfo(algorithm)
             '<h3>Read more</h3>' + 
             '<ul><li><a href = "https://en.wikipedia.org/wiki/Maze_generation_algorithm#Recursive_division_method">Wikipedia</a></li><li><a href = "http://weblog.jamisbuck.org/2011/1/12/maze-generation-recursive-division-algorithm">The Buckblog - Maze Generation: Recursive Division</a></li></ul>';
             break;
+        case 'recursiveBacktracking':
+            name.innerHTML = 'Recursive Backtracking Algorithm';
+            info.innerHTML = '<img src = recursiveBacktracking.gif></img>' + 
+            '<h3>Description</h3>' + 
+            '<p>Mazes can be created using a recursive backtracking method, which works in the same way as Depth-First Search (DFS) works. It begins with a grid of walls rather than an empty grid. <b>The algorithms starts at the start node, and carves out a path in random directions until it gets stuck, before backtracking.</b></p>' +  
+            '<h3>Read more</h3>' + 
+            '<ul><li><a href = "https://en.wikipedia.org/wiki/Maze_generation_algorithm#Recursive_backtracker">Wikipedia</a></li><li><a href = "https://weblog.jamisbuck.org/2010/12/27/maze-generation-recursive-backtracking">The Buckblog - Maze Generation: Recursive Backtracking</a></li></ul>';
+            break;
+        
     }
     document.getElementById('moreInfo').style.display = 'block';
 }

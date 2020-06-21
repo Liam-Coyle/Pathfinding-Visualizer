@@ -262,6 +262,28 @@ class Grid
     }
 
     /**
+     * Gets the far neighbours of a node (Above 2, right 2, below 2, left 2)
+     * @param {Node} node The node to get the far neighbours of
+     * @return {Array} Array of neighbouring nodes in the order [Above 2, Right 2, Below 2, Left 2]
+     */
+    getFarNeighboursOfNode(node)
+    {
+        if (node === null)
+        {
+            throw('node cannot be null');
+        }
+
+        let [nodeRow, nodeColumn] = this.getNodePositionAsInt(node);
+
+        let neighbouringNodes = new Array(4);
+        neighbouringNodes[0] = (nodeRow - 2 >= 0) ? this.nodes[nodeRow - 2][nodeColumn] : null; //Above 2
+        neighbouringNodes[1] = (nodeColumn + 2 < this.width) ? this.nodes[nodeRow][nodeColumn + 2] : null; //Right 2
+        neighbouringNodes[2] = (nodeRow + 2 < this.height) ? this.nodes[nodeRow + 2][nodeColumn] : null; //Below 2
+        neighbouringNodes[3] = (nodeColumn - 2 >= 0) ? this.nodes[nodeRow][nodeColumn - 2] : null; //Left 2
+        return neighbouringNodes;
+    }
+
+    /**
      * Calculates the manhattan distance between 2 nodes
      * @param {Node} nodeA 
      * @param {Node} nodeB 
@@ -367,5 +389,51 @@ class Grid
             order.push(this.nodes[this.height - 1][column]);
         }
         return order;
+    }
+
+    /**
+    * Makes every node in a grid a wall, except the start and target node
+    */
+    fillWalls()
+    {
+        for (let row = 0; row < this.height; row++)
+        {
+            for (let column = 0; column < this.width; column++)
+            {
+                let thisNode = this.nodes[row][column];
+                if (thisNode != this.startNode && thisNode != this.targetNode)
+                {
+                    thisNode.setState(State.WALL);
+                }
+            }
+        }
+    }
+
+    /**
+     * Get the node between 2 nodes
+     * @param {Node} nodeA The first node 
+     * @param {Node} nodeB The second node
+     * @return {Node} The node between nodeA and nodeB
+     */
+    getNodeBetween(nodeA, nodeB)
+    {
+        if (nodeA === null || nodeB === null)
+        {
+            throw ('node cannot be null');
+        }
+        
+        let neighboursOfNodeA = this.getNeighboursOfNode(nodeA);
+        let neighboursOfNodeB = this.getNeighboursOfNode(nodeB);
+
+        for (let neighbourOfA of neighboursOfNodeA)
+        {
+            for (let neighbourOfB of neighboursOfNodeB)
+            {
+                if (neighbourOfA === neighbourOfB)
+                {
+                    return neighbourOfA;
+                }
+            }
+        }
     }
 }
