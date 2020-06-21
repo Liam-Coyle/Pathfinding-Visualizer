@@ -1,5 +1,11 @@
+var slider = document.getElementById("speedSelector");
+let animationSpeed = slider.value;
 const myGrid = new Grid('grid', 75, 27);
 myGrid.draw();
+
+slider.oninput = function() {
+  animationSpeed = this.value;
+}
 
 /**
  * Visualizes the selected pathfinding algorithm
@@ -18,8 +24,8 @@ function visualizeAlgorithm(algorithm)
         return;
     }
 
-    let visitedNodesAnimationDelay = 10;
-    let shortestPathAnimationDelay = 20;
+    let visitedNodesAnimationDelay = animationSpeed;
+    let shortestPathAnimationDelay = animationSpeed;
 
     let targetNodeIndex = animateVisitedNodes(order, visitedNodesAnimationDelay);
     let shortestPathOrder = getShortestPathOrder(previousNodes, myGrid.targetNode);
@@ -46,8 +52,7 @@ function visualizeMazeAlgorithm(algorithm)
         return;
     }
 
-    let animationDelay = 10;
-    animateMaze(wallOrder, animationDelay, carvePath);
+    animateMaze(wallOrder, animationSpeed, carvePath);
 }
 
 /**

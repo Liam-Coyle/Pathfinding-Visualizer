@@ -34,6 +34,42 @@
     text-decoration: none;
 }
 
+.navBar .slidecontainer {
+    color: white;
+    display: inline-block;
+    text-align: center;
+    padding: 2px 16px 14px 16px;
+}
+
+.navBar .slider {
+    -webkit-appearance: none; 
+    appearance: none;
+    width: 100%;
+    height: 5px; 
+    border-radius: 5px;
+    background: white; 
+    outline: none;
+    transform: rotate(180deg);
+}
+  
+.navBar .slider::-webkit-slider-thumb {
+    -webkit-appearance: none; 
+    appearance: none;
+    width: 17px; 
+    height: 17px; 
+    border-radius: 50%;
+    background: #ff7931; 
+    cursor: pointer;
+}
+  
+.navBar .slider::-moz-range-thumb {
+    width: 17px; 
+    height: 17px; 
+    border-radius: 50%;
+    background: #ff7931; 
+    cursor: pointer; 
+}
+
 .navBar #github {
     float: right;
     margin: 8px 10px 0px 0px;
