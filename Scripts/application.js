@@ -218,7 +218,7 @@ function openMoreInfo(algorithm)
     {
         case 'dijkstras':
             name.innerHTML = 'Dijkstra\'s Algorithm';
-            info.innerHTML = '<img src = dijkstras.gif></img>' + 
+            info.innerHTML = '<img src = Gifs/Pathfinding/dijkstras.gif></img>' + 
             '<h3>Description</h3>' + 
             '<p>This algorithm begins with a start node and an "open set" of candidate nodes. At each step, <b>the node in the open set with the lowest distance from the start</b> is examined. The node is marked "closed", and all nodes adjacent to it are added to the open set if they have not already been examined. This process repeats until a path to the destination has been found. Since the lowest distance nodes are examined first, the first time the destination is found, the path to it will be the shortest path.' +  
             '<h3 id = "advHeader">+ Advantages</h3>' + 
@@ -232,7 +232,7 @@ function openMoreInfo(algorithm)
             break;
         case 'aStar':
             name.innerHTML = 'A* Algorithm';
-            info.innerHTML = '<img src = aStar.gif></img>' + 
+            info.innerHTML = '<img src = Gifs/Pathfinding/aStar.gif></img>' + 
             '<h3>Description</h3>' + 
             '<p>A* is a variant of Dijkstra\'s algorithm commonly used in games. <b>A* assigns a weight to each open node equal to the weight of the edge to that node plus the approximate distance between that node and the finish.</b> This approximate distance is found by the heuristic <sup>[3]</sup>, and represents a minimum possible distance between that node and the end. This allows it to eliminate longer paths once an initial path is found. If there is a path of length x between the start and finish, and the minimum distance between a node and the finish is greater than x, that node need not be examined.</p>' +  
             '<h3 id = "advHeader">+ Advantages</h3>' + 
@@ -246,7 +246,7 @@ function openMoreInfo(algorithm)
             break;
             case 'breadthFirstSearch':
                 name.innerHTML = 'Breadth-First Search (BFS) Algorithm';
-                info.innerHTML = '<img src = breadthFirstSearch.gif></img>' + 
+                info.innerHTML = '<img src = Gifs/Pathfinding/breadthFirstSearch.gif></img>' + 
                 '<h3>Description</h3>' + 
                 '<p>Breadth-first search (BFS) is an algorithm for traversing or searching tree or graph data structures. <b>It starts at the tree root (or in this case, the graph start node), and explores all of the neighbor nodes at the present depth prior to moving on to the nodes at the next depth level.</b> It uses the opposite strategy as depth-first search, which instead explores the node branch as far as possible before being forced to backtrack and expand other nodes.</p>' +  
                 '<h3 id = "advHeader">+ Advantages</h3>' + 
@@ -260,7 +260,7 @@ function openMoreInfo(algorithm)
                 break;
             case 'depthFirstSearch':
             name.innerHTML = 'Depth-First Search (DFS) Algorithm';
-            info.innerHTML = '<img src = depthFirstSearch.gif></img>' + 
+            info.innerHTML = '<img src = Gifs/Pathfinding/depthFirstSearch.gif></img>' + 
             '<h3>Description</h3>' + 
             '<p>Depth-first search (DFS) is an algorithm for traversing or searching tree or graph data structures. <b>The algorithm starts at the root node (or in this case, the start node) and explores as far as possible along each branch before backtracking.</b></p>' +  
             '<h3 id = "advHeader">+ Advantages</h3>' + 
@@ -274,7 +274,7 @@ function openMoreInfo(algorithm)
             break;
         case 'recursiveDivision':
             name.innerHTML = 'Recursive Division Algorithm';
-            info.innerHTML = '<img src = recursiveDivision.gif></img>' + 
+            info.innerHTML = '<img src = Gifs/MazeGeneration/recursiveDivision.gif></img>' + 
             '<h3>Description</h3>' + 
             '<p>Mazes can be created with recursive division, an algorithm which works as follows: Begin with the maze\'s space with no walls. Call this a chamber. <b>Divide the chamber with a randomly positioned wall</b> (or multiple walls) <b>where each wall contains a randomly positioned passage opening within it. Then recursively repeat </b>the process on the subchambers until all chambers are minimum sized. This method results in mazes with long straight walls crossing their space, making it easier to see which areas to avoid.</p>' +  
             '<h3>Read more</h3>' + 
@@ -282,7 +282,7 @@ function openMoreInfo(algorithm)
             break;
         case 'recursiveBacktracking':
             name.innerHTML = 'Recursive Backtracking Algorithm';
-            info.innerHTML = '<img src = recursiveBacktracking.gif></img>' + 
+            info.innerHTML = '<img src = Gifs/MazeGeneration/recursiveBacktracking.gif></img>' + 
             '<h3>Description</h3>' + 
             '<p>Mazes can be created using a recursive backtracking algorithm, which works in the same way as Depth-First Search (DFS). It begins with a grid of walls rather than an empty grid. <b>The algorithms starts at the start node, and carves out a path in random directions until it gets stuck, before backtracking.</b></p>' +  
             '<h3>Read more</h3>' + 
