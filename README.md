@@ -37,3 +37,7 @@ Note: This project is not fully finished. The following features must be added:
 
 # Recursive Backtracking
 ![recursiveBacktracking](/Gifs/MazeGeneration/recursiveBacktracking.gif)
+
+# Maze Solution Example
+![SearchExample](/Gifs/SearchExample.gif)
+
