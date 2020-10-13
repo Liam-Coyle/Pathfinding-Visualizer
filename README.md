@@ -12,3 +12,28 @@ Note: This project is not fully finished. The following features must be added:
   <li>Many more pathfinding algorithms</li>
   <li>Many more maze generation algorithms</li>
 </ul>
+
+# Gallery
+# Main UI
+![UI](/Images/UI.png)
+
+# More Info UI (Accessed by clicking '?' beside an algorithm)
+![MoreInfo](/Gifs/MoreInfo.gif)
+
+# Dijkstras
+![Dijkstras](/Gifs/Pathfinding/dijkstras.gif)
+
+# A*
+![aStar](/Gifs/Pathfinding/aStar.gif)
+
+# Breadth-First Search (BFS)
+![breadthFirstSearch](/Gifs/Pathfinding/breadthFirstSearch.gif)
+
+# Depth-First Search (BFS)
+![depthFirstSearch](/Gifs/Pathfinding/depthFirstSearch.gif)
+
+# Recursive Division
+![recursiveDivision](/Gifs/MazeGeneration/recursiveDivision.gif)
+
+# Recursive Backtracking
+![recursiveBacktracking](/Gifs/MazeGeneration/recursiveBacktracking.gif)
